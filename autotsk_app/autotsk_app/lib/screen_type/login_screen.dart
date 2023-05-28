@@ -42,6 +42,24 @@ class _LoginScreenState extends State<LoginScreen> {
               ), */
 
               SizedBox(height: 20.0),
+
+              Container(
+                color: thirdColor,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(110.0, 10.0, 110.0, 10.0),
+                  child: Text(
+                    "autoTsk",
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color: primaryColor,
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 100.0),
+
               // text field for email
               TextFieldInput(
                 textEditingController: _emailcontroller,
@@ -62,37 +80,54 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 20.0),
 
               // button login
-              Container(
-                child: const Text('Log In'),
-                width: double.infinity,
-                alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(vertical: 12.0),
-                decoration: const ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4))),
-                  color: blueColor,
-                ),
-              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login_comp');
+                  },
+                  child: Container(
+                    child: const Text('Log In',
+                        style: TextStyle(color: primaryColor)),
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(vertical: 12.0),
+                    decoration: const ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                      color: secondColor,
+                    ),
+                  )),
 
-              Flexible(child: Container(), flex: 1),
+              Flexible(child: Container(), flex: 2),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    child: Text("Don't have an account?"),
+                    child: Text(
+                      "Don't have an account?",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     padding: const EdgeInsets.symmetric(vertical: 8),
                   ),
                   SizedBox(width: 10.0),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Text("Sign Up",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  TextButton(
+                    onPressed: () {
+                      // route to the signup page when user clicks
+                      Navigator.pushNamed(context, '/signup');
+                    },
+                    child: Text("Sign Up here",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: secondColor,
+                        )),
                     // padding: const EdgeInsets.symmetric(vertical: 8),
                   ),
                 ],
               ),
 
+              SizedBox(height: 15.0),
               // transitioning to signup page
             ],
           ),

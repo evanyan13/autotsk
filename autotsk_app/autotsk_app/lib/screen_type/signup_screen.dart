@@ -106,25 +106,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 15.0),
 
               // button login
-              InkWell(
-                onTap: () async {
+              TextButton(
+                onPressed: () async {
                   String res = await AuthMethods().signUpUser(
                     email: _emailcontroller.text,
                     username: _usernamecontroller.text,
                     password: _passWcontroller.text,
                     bio: _biocontroller.text,
                   );
+
+                  Navigator.pushNamed(context, '/signup_comp');
                   print(res);
                 },
                 child: Container(
-                  child: const Text('Sign up'),
+                  child: const Text(
+                    'Sign up',
+                    style: TextStyle(
+                      color: primaryColor,
+                      fontSize: 15.0,
+                    ),
+                  ),
                   width: double.infinity,
                   alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(vertical: 12.0),
                   decoration: const ShapeDecoration(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(4))),
-                    color: blueColor,
+                    color: secondColor,
                   ),
                 ),
               ),

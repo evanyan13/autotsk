@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:autotsk_app/screen_type/login_comp.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +10,7 @@ import 'package:autotsk_app/responsive/web_screen_layout.dart';
 import 'package:autotsk_app/screen_type/login_screen.dart';
 import 'package:autotsk_app/utilities/colors_scheme.dart';
 import 'package:autotsk_app/screen_type/signup_screen.dart';
+import 'package:autotsk_app/screen_type/signup_comp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +49,16 @@ class MyApp extends StatelessWidget {
       //   mobileScreenLayout: MobileScreenLayout(),
       //   webScreenLayout: WebScreenLayout(),
       // ),
-      home: SignUpScreen(),
+      // home: LoginComp(),
+      // initialRoute: '/',
+      initialRoute: '/login',
+      routes: {
+        '/': (context) => LoginScreen(),
+        '/login': (context) => LoginScreen(),
+        '/signup': (context) => SignUpScreen(),
+        '/signup_comp': (context) => SignUpComp(),
+        '/login_comp': (context) => LoginComp(),
+      },
     );
   }
 }
