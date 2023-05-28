@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "137691831597",
+    "project_id": "autotsk-33596",
+    "storage_bucket": "autotsk-33596.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137691831597:android:5aebac69d771a89f4e47a4",
+        "android_client_info": {
+          "package_name": "com.autoTsk.autotsk_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoKQSP7vmmgjyGEo6PmZMnR2BhCdQl_yY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
