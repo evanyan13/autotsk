@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 // color scheme can be changed, tenatively use this.
-const mobileBackgroundColor = Color.fromRGBO(0, 0, 0, 1);
-const webBackgroundColor = Color.fromRGBO(18, 18, 18, 1);
+const mobileBackgroundColor = Color.fromRGBO(242, 242, 242, 100);
+const webBackgroundColor = Color.fromRGBO(242, 242, 242, 100);
 const mobileSearchColor = Color.fromRGBO(38, 38, 38, 1);
-const blueColor = Color.fromRGBO(0, 149, 246, 1);
+const blueColor = Color.fromRGBO(61, 79, 96, 1);
 const primaryColor = Colors.white;
 const secondaryColor = Colors.grey;

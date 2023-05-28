@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Instagram Clone',
+      title: 'autoTsk App',
 
       // will use all the dark colors
       theme: ThemeData.dark().copyWith(
