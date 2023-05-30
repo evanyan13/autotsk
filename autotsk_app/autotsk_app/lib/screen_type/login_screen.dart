@@ -35,12 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
             children: <Widget>[
               Flexible(child: Container(), flex: 1),
               // logo image
-              /* SvgPicture.asset(
-                'assets/ic_instagram.svg',
-                height: 64,
-                color: primaryColor,
-              ), */
-
               SizedBox(height: 20.0),
 
               Container(
