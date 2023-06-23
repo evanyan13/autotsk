@@ -1,4 +1,4 @@
-import 'package:autotsk/screen_type/calender_page.dart';
+import 'package:autotsk/screen_type/calendar_page.dart';
 import 'package:autotsk/screen_type/to_do_page.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => CalenderPage()));
+                        builder: (context) => CalendarPage()));
                   }),
               ListTile(
                   leading: Icon(Icons.home),

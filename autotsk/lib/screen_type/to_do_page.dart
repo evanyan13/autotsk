@@ -7,7 +7,7 @@ class ToDoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: signUpBgColour,
+      backgroundColor: mainLightBgColour,
       body: Center(child: Text("To Do Page")),
     );
   }
