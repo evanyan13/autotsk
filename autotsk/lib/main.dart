@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:autotsk/screen_type/signin_page.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
 import 'package:autotsk/screen_type/home_page.dart';
+import 'package:autotsk/screen_type/addtask_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Signin(),
+      home: AddTask(),
       debugShowCheckedModeBanner: false,
     );
   }

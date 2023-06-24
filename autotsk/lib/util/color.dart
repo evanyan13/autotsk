@@ -10,3 +10,4 @@ const signUpBgColour = Color.fromRGBO(223, 229, 243, 1);
 const whiteColour = Color.fromRGBO(255, 255, 255, 1);
 const signButtonColour = Color.fromRGBO(66, 44, 168, 1);
 const crossbuttonColor = Color.fromRGBO(15, 37, 83, 1);
+const catColor = Color.fromRGBO(83, 80, 213, 1);

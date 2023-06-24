@@ -3,13 +3,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 
-class TextInputField extends StatelessWidget {
+class MultiLineText extends StatelessWidget {
   final TextEditingController textEditingController;
   final bool isPassW;
   final String hintText;
   final TextInputType textInputType;
   final Color bgColor;
-  const TextInputField({
+  const MultiLineText({
     Key? key,
     required this.textEditingController,
     required this.hintText,
@@ -37,7 +37,11 @@ class TextInputField extends StatelessWidget {
         contentPadding: const EdgeInsets.all(8.0),
         fillColor: bgColor,
       ),
-      keyboardType: textInputType,
+      // only change that was made
+      keyboardType: TextInputType.multiline,
+      expands: true,
+      maxLines: null,
+      textAlign: TextAlign.center,
       obscureText: isPassW,
     );
   }
