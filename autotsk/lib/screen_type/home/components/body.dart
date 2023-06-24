@@ -9,6 +9,8 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var time = DateTime.now;
+
     return SingleChildScrollView(
       child: Column(children: <Widget>[
         greetings_row(),
@@ -46,10 +48,11 @@ class Body extends StatelessWidget {
                 child: Text(
                   "View All",
                   style: TextStyle(
-                  fontFamily: 'Neometric',
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16,
-                ),),
+                    fontFamily: 'Neometric',
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16,
+                  ),
+                ),
               )
             ],
           ),

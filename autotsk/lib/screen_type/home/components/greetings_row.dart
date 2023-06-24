@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import "package:flutter/material.dart";
+import 'package:intl/intl.dart';
 
 class greetings_row extends StatelessWidget {
   const greetings_row({
@@ -33,7 +34,7 @@ class greetings_row extends StatelessWidget {
                       height: 4,
                     ),
                     Text(
-                      "24th June 2023",
+                      DateFormat("yMMMEd").format(DateTime.now()),
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Neometric',
