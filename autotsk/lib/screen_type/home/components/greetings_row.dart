@@ -3,8 +3,8 @@
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
 
-class greetings_row extends StatelessWidget {
-  const greetings_row({
+class GreetingRow extends StatelessWidget {
+  const GreetingRow({
     super.key,
   });
 
