@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/addtaskform',
       routes: {
         '/ob1': (context) => OnboardingFirst(),
         '/ob2': (context) => OnboardingSecond(),
@@ -41,9 +40,10 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.active) {
             // it means user has been authenticated
             if (snapshot.hasData) {
-              return Home();
+              print(snapshot.data);
+              return AddTask();
             } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
+              return Center(child: Text('${snapshot.error}'));
             }
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
             );
           }
 
-          return const Signin();
+          return const OnboardingFirst();
         },
       ),
       debugShowCheckedModeBanner: false,

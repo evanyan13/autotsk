@@ -23,7 +23,7 @@ class AuthMethods {
             email: email, password: password);
 
         // add user to firestore db
-        await _firestore.collection('users').add({
+        await _firestore.collection('users').doc(userCred.user!.uid).set({
           'username': username,
           'uid': userCred.user!.uid,
           'email': email,
