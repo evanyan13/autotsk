@@ -1,6 +1,12 @@
+import 'package:autotsk/screen_type/addtask_page.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/util/text_input_field.dart';
+import 'package:autotsk/animation/custom_rect_tween.dart';
+import 'package:autotsk/routing/hero_dialog_route.dart';
+import 'package:autotsk/auth/auth_methods.dart';
+import 'package:autotsk/screen_type/home_page.dart';
+import 'package:autotsk/screen_type/signup_page.dart';
 
 // dimensions, width: 365, height: 623
 
@@ -11,291 +17,353 @@ class Signin extends StatefulWidget {
   State<Signin> createState() => _SigninState();
 }
 
+const String _heroAddTodo = 'add-todo-hero';
+
 class _SigninState extends State<Signin> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passWController = TextEditingController();
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passWController.dispose();
+  }
+
+  void LoginUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    String resp = await AuthMethods().LoginUser(
+      email: _emailController.text,
+      password: _passWController.text,
+    );
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (resp == 'success') {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => const Home(),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20.0),
-                ),
-                color: signUpBgColour,
-              ),
-              width: 365,
-              height: 623,
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(0.0),
+        child: Hero(
+          tag: _heroAddTodo,
+          createRectTween: (begin, end) {
+            return CustomRectTween(begin: begin, end: end);
+          },
+          child: Material(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+            child: SingleChildScrollView(
+              child: Stack(
+                clipBehavior: Clip.none,
                 children: <Widget>[
-                  SizedBox(
-                    height: 20,
-                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20.0),
+                      ),
+                      color: signUpBgColour,
+                    ),
+                    width: 365,
+                    height: 623,
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 40,
+                        ),
 
-                  Text(
-                    "Sign In",
-                    style: TextStyle(
-                      fontFamily: 'Neometric',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 35,
+                        Text(
+                          "Sign In",
+                          style: TextStyle(
+                            fontFamily: 'Neometric',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 35,
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        Row(
+                          children: <Widget>[
+                            SizedBox(width: 35),
+                            Text(
+                              "Email",
+                              style: TextStyle(
+                                fontFamily: 'Neometric',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(height: 5),
+
+                        // text field for email input
+                        Row(
+                          children: <Widget>[
+                            Container(
+                              width: 35,
+                            ),
+                            Expanded(
+                              child: TextInputField(
+                                textEditingController: _emailController,
+                                hintText: 'Enter your Email',
+                                textInputType: TextInputType.text,
+                              ),
+                            ),
+                            Container(
+                              width: 35,
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(height: 10),
+
+                        Row(
+                          children: <Widget>[
+                            SizedBox(width: 35),
+                            Text(
+                              "Password",
+                              style: TextStyle(
+                                fontFamily: 'Neometric',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(height: 5),
+
+                        // text field for password input
+                        Row(
+                          children: <Widget>[
+                            Container(
+                              width: 35,
+                            ),
+                            Expanded(
+                              child: TextInputField(
+                                textEditingController: _passWController,
+                                hintText: 'Enter your Password',
+                                textInputType: TextInputType.text,
+                                isPassW: true,
+                              ),
+                            ),
+                            Container(
+                              width: 35,
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(height: 30),
+
+                        SizedBox(
+                          height: 50,
+                          width: 290,
+                          child: ElevatedButton(
+                            onPressed: LoginUser,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: signButtonColour,
+                              padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15.0),
+                                ),
+                              ),
+                            ),
+                            child: _isLoading
+                                ? Container(
+                                    height: 40,
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        color: mainLightBgColour,
+                                      ),
+                                    ),
+                                  )
+                                : Text(
+                                    'Sign In',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Neometric',
+                                    ),
+                                  ),
+                          ),
+                        ),
+
+                        SizedBox(height: 40),
+
+                        Row(
+                          children: <Widget>[
+                            SizedBox(width: 58),
+                            Row(
+                              children: <Widget>[
+                                Image(
+                                  image: AssetImage('assets/strLine.png'),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'OR',
+                                  style: TextStyle(
+                                    fontFamily: "Neometric",
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Image(
+                                  image: AssetImage('assets/strLine.png'),
+                                ),
+                              ],
+                            ),
+                            SizedBox(width: 40),
+                          ],
+                        ),
+
+                        SizedBox(height: 10),
+
+                        Text(
+                          'Sign Up now to maximise your productivity',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: "Neometric",
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        Row(
+                          // if you want the room, just take anybox and dont was them.
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(width: 20),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      HeroDialogRoute(
+                                        builder: (context) => Center(
+                                          child: SignUp(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Image(
+                                    image: AssetImage('assets/darkEmail.png'),
+                                  ),
+                                ),
+                                SizedBox(height: 3),
+                                Text(
+                                  "Email",
+                                  style: TextStyle(
+                                    fontFamily: "Neometric",
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image(
+                                  image: AssetImage('assets/Googleicon.png'),
+                                ),
+                                SizedBox(height: 3),
+                                Text(
+                                  "Google",
+                                  style: TextStyle(
+                                    fontFamily: "Neometric",
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image(
+                                  image: AssetImage('assets/Appleicon.png'),
+                                ),
+                                Text(
+                                  "Apple",
+                                  style: TextStyle(
+                                    fontFamily: "Neometric",
+                                    fontSize: 13,
+                                  ),
+                                ),
+                                SizedBox(height: 3),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 13,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-
-                  SizedBox(height: 20),
-
-                  Row(
-                    children: <Widget>[
-                      SizedBox(width: 35),
-                      Text(
-                        "Email",
-                        style: TextStyle(
-                          fontFamily: 'Neometric',
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(height: 5),
-
-                  // text field for email input
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        width: 35,
-                      ),
-                      Expanded(
-                        child: TextInputField(
-                          textEditingController: _usernameController,
-                          hintText: 'Enter your Email',
-                          textInputType: TextInputType.text,
-                        ),
-                      ),
-                      Container(
-                        width: 35,
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(height: 10),
-
-                  Row(
-                    children: <Widget>[
-                      SizedBox(width: 35),
-                      Text(
-                        "Password",
-                        style: TextStyle(
-                          fontFamily: 'Neometric',
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(height: 5),
-
-                  // text field for password input
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        width: 35,
-                      ),
-                      Expanded(
-                        child: TextInputField(
-                          textEditingController: _usernameController,
-                          hintText: 'Enter your Password',
-                          textInputType: TextInputType.text,
-                        ),
-                      ),
-                      Container(
-                        width: 35,
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(height: 30),
-
-                  SizedBox(
-                    height: 50,
-                    width: 290,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        print('hello');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: signButtonColour,
-                        padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15.0),
+                  Positioned(
+                    top: 600,
+                    right: 155,
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: crossbuttonColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(50.0),
+                            ),
                           ),
                         ),
-                      ),
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Neometric',
+                        child: Text(
+                          'X',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Neometric",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-
-                  SizedBox(height: 20),
-
-                  Opacity(
-                    opacity: 0,
-                    child: Container(
-                      child: Text('Sign Up with Google or Apple'),
-                    ),
-                  ),
-
-                  Row(
-                    children: <Widget>[
-                      SizedBox(width: 58),
-                      Row(
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage('assets/strLine.png'),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'OR',
-                            style: TextStyle(
-                              fontFamily: "Neometric",
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Image(
-                            image: AssetImage('assets/strLine.png'),
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 40),
-                    ],
-                  ),
-
-                  SizedBox(height: 10),
-
-                  Text(
-                    'Sign Up to earn Kris+ rewards',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontFamily: "Neometric",
-                    ),
-                  ),
-
-                  SizedBox(height: 20),
-
-                  Row(
-                    // if you want the room, just take anybox and dont was them.
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(width: 30),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage('assets/darkEmail.png'),
-                          ),
-                          SizedBox(height: 3),
-                          Text(
-                            "Email",
-                            style: TextStyle(
-                              fontFamily: "Neometric",
-                              fontSize: 13,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage('assets/Googleicon.png'),
-                          ),
-                          SizedBox(height: 3),
-                          Text(
-                            "Google",
-                            style: TextStyle(
-                              fontFamily: "Neometric",
-                              fontSize: 13,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage('assets/Appleicon.png'),
-                          ),
-                          Text(
-                            "Apple",
-                            style: TextStyle(
-                              fontFamily: "Neometric",
-                              fontSize: 13,
-                            ),
-                          ),
-                          SizedBox(height: 3),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                    ],
                   ),
                 ],
               ),
             ),
-            Positioned(
-              top: 600,
-              right: 155,
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: crossbuttonColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(50.0),
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    'X',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Neometric",
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

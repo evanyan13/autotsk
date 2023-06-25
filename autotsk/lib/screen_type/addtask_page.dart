@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:autotsk/util/color.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/text_input_field.dart';
@@ -33,30 +31,18 @@ class _AddTaskState extends State<AddTask> {
             children: <Widget>[
               SizedBox(height: 15),
               Container(
-                width: 350,
+                width: 330,
                 child: Row(
                   children: [
-                    Stack(
-                      children: [
-                        Image(
-                          image: AssetImage('assets/cross-circle.png'),
-                          width: 35.0,
-                          height: 35.0,
-                        ),
-                        Opacity(
-                          opacity: 0,
-                          child: SizedBox(
-                            height: 35,
-                            width: 35,
-                            child: FloatingActionButton(
-                              onPressed: () {
-                                print('hello');
-                              },
-                              backgroundColor: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ],
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop(context);
+                      },
+                      child: Image(
+                        image: AssetImage('assets/cross-circle.png'),
+                        width: 35.0,
+                        height: 35.0,
+                      ),
                     ),
                     SizedBox(
                       width: 5,
@@ -108,7 +94,7 @@ class _AddTaskState extends State<AddTask> {
               ), */
               SizedBox(height: 20),
               Container(
-                width: 350,
+                width: 330,
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "New Task",
@@ -122,7 +108,7 @@ class _AddTaskState extends State<AddTask> {
               ),
               SizedBox(height: 5),
               Container(
-                width: 350,
+                width: 330,
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Title",
@@ -136,7 +122,7 @@ class _AddTaskState extends State<AddTask> {
               ),
               SizedBox(height: 3),
               Container(
-                width: 350,
+                width: 330,
                 child: TextInputField(
                   textEditingController: _titleController,
                   hintText: 'Add a title',
@@ -149,7 +135,7 @@ class _AddTaskState extends State<AddTask> {
                   Column(
                     children: <Widget>[
                       Container(
-                        width: 135,
+                        width: 105,
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Date',
@@ -165,9 +151,9 @@ class _AddTaskState extends State<AddTask> {
                       Container(
                         child: Row(
                           children: <Widget>[
-                            SizedBox(width: 22),
+                            SizedBox(width: 33),
                             Container(
-                              width: 161,
+                              width: 141,
                               child: TextInputField(
                                 textEditingController: _dateController,
                                 hintText: 'Add a Date',
@@ -182,7 +168,7 @@ class _AddTaskState extends State<AddTask> {
                   Column(
                     children: <Widget>[
                       Container(
-                        width: 135,
+                        width: 100,
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Priority',
@@ -198,9 +184,9 @@ class _AddTaskState extends State<AddTask> {
                       Container(
                         child: Row(
                           children: <Widget>[
-                            SizedBox(width: 25),
+                            SizedBox(width: 45),
                             Container(
-                              width: 161,
+                              width: 141,
                               child: TextInputField(
                                 textEditingController: _priorController,
                                 hintText: 'Priority level',
@@ -218,7 +204,7 @@ class _AddTaskState extends State<AddTask> {
                 children: <Widget>[
                   SizedBox(height: 10),
                   Container(
-                    width: 345,
+                    width: 325,
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "Category",
@@ -233,7 +219,7 @@ class _AddTaskState extends State<AddTask> {
                   SizedBox(height: 5),
                   Row(
                     children: [
-                      SizedBox(width: 20),
+                      SizedBox(width: 28),
                       SizedBox(
                         width: 50,
                         height: 50,
@@ -258,7 +244,7 @@ class _AddTaskState extends State<AddTask> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 20),
+                      SizedBox(width: 15),
                       Container(
                         width: 80,
                         height: 40,
@@ -270,7 +256,7 @@ class _AddTaskState extends State<AddTask> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 20),
+                      SizedBox(width: 15),
                       Container(
                         width: 80,
                         height: 40,
@@ -282,7 +268,7 @@ class _AddTaskState extends State<AddTask> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 20),
+                      SizedBox(width: 15),
                       Container(
                         width: 80,
                         height: 40,
@@ -300,7 +286,7 @@ class _AddTaskState extends State<AddTask> {
               ),
               SizedBox(height: 15),
               Container(
-                width: 345,
+                width: 325,
                 child: Text(
                   "Location",
                   style: TextStyle(
@@ -313,7 +299,7 @@ class _AddTaskState extends State<AddTask> {
               ),
               SizedBox(height: 3),
               Container(
-                width: 350,
+                width: 325,
                 child: TextInputField(
                   textEditingController: _locController,
                   hintText: 'Enter address',
@@ -322,7 +308,7 @@ class _AddTaskState extends State<AddTask> {
               ),
               SizedBox(height: 15),
               Container(
-                width: 345,
+                width: 325,
                 child: Text(
                   "Notes",
                   style: TextStyle(
@@ -335,7 +321,7 @@ class _AddTaskState extends State<AddTask> {
               ),
               SizedBox(height: 3),
               SizedBox(
-                width: 350,
+                width: 330,
                 height: 180,
                 child: MultiLineText(
                   textEditingController: _notesController,
@@ -346,7 +332,7 @@ class _AddTaskState extends State<AddTask> {
               SizedBox(height: 15),
               SizedBox(
                 height: 50,
-                width: 355,
+                width: 335,
                 child: ElevatedButton(
                   onPressed: () {
                     // print('hello');

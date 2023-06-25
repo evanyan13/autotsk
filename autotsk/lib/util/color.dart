@@ -11,3 +11,4 @@ const whiteColour = Color.fromRGBO(255, 255, 255, 1);
 const signButtonColour = Color.fromRGBO(66, 44, 168, 1);
 const crossbuttonColor = Color.fromRGBO(15, 37, 83, 1);
 const catColor = Color.fromRGBO(83, 80, 213, 1);
+const transparentBgColor = Color.fromARGB(10, 15, 37, 83);
