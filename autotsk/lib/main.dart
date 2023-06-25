@@ -5,7 +5,6 @@ import 'package:autotsk/onboarding/ob3.dart';
 import 'package:autotsk/util/color.dart';
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:autotsk/util/color.dart';
 import 'package:autotsk/screen_type/signin_page.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
 import 'package:autotsk/screen_type/addtask_page.dart';

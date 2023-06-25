@@ -4,7 +4,7 @@ import 'package:autotsk/util/color.dart';
 import 'package:autotsk/util/text_input_field.dart';
 import 'package:autotsk/auth/auth_methods.dart';
 import 'package:autotsk/util/snackbar.dart';
-import 'package:autotsk/screen_type/home_page.dart';
+import 'package:autotsk/screen_type/home/home_page.dart';
 // dimensions, width: 365, height: 623
 
 class SignUp extends StatefulWidget {
