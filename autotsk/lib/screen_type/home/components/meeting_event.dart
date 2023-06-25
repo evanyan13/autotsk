@@ -5,14 +5,14 @@ import 'package:autotsk/util/color.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class TodayEvent extends StatefulWidget {
-  const TodayEvent({super.key});
+class MeetingEvent extends StatefulWidget {
+  const MeetingEvent({super.key});
 
   @override
-  State<TodayEvent> createState() => _TodayEventState();
+  State<MeetingEvent> createState() => _MeetingEventState();
 }
 
-class _TodayEventState extends State<TodayEvent> {
+class _MeetingEventState extends State<MeetingEvent> {
   int activeIndex = 0;
   final controller = CarouselController();
   final items = [
@@ -62,7 +62,7 @@ class _TodayEventState extends State<TodayEvent> {
         color: homePageBgLightPurpleClr,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Center(child: Text("Task $index"))
+      child: Center(child: Text("Meeting $index"))
       // Image.asset(images, fit: BoxFit.fitHeight),
       );
 }

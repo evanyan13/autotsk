@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/screen_type/home/components/body.dart';
 import 'package:autotsk/screen_type/side_bar.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:autotsk/screen_type/home/components/nav_bar.dart';
 import 'package:autotsk/screen_type/calendar_page.dart';
 import 'package:autotsk/screen_type/to_do_page.dart';
 
@@ -25,38 +26,7 @@ class _HomePageState extends State<HomePage> {
       appBar: buildAppBar(),
       drawer: SideBar(),
       body: Body(),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SalomonBottomBar(
-            currentIndex: _currentIndex,
-            onTap: (i) => setState(() => _currentIndex = i),
-            items: [
-              SalomonBottomBarItem(
-                icon: Icon(Icons.home),
-                title: Text("Home"),
-                selectedColor: Colors.lightBlue,
-                unselectedColor: Colors.white,
-              ),
-              SalomonBottomBarItem(
-                icon: Icon(Icons.calendar_month),
-                title: Text("Calendar"),
-                selectedColor: Colors.lightBlue,
-                unselectedColor: Colors.white,
-              ),
-              SalomonBottomBarItem(
-                icon: Icon(Icons.list_rounded),
-                title: Text("To-Do"),
-                selectedColor: Colors.lightBlue,
-                unselectedColor: Colors.white,
-              ),
-              SalomonBottomBarItem(
-                icon: Icon(Icons.alarm_rounded),
-                title: Text("Reminder"),
-                selectedColor: Colors.lightBlue,
-                unselectedColor: Colors.white,
-              ),
-            ]),
-      ),
+      bottomNavigationBar: NavBar(),
     );
   }
 
