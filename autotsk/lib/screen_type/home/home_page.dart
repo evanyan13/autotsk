@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/screen_type/home/components/body.dart';
-import 'package:autotsk/screen_type/common_compents/side_bar.dart';
-import 'package:autotsk/screen_type/common_compents/nav_bar.dart';
+import 'package:autotsk/screen_type/common_components/side_bar.dart';
+import 'package:autotsk/screen_type/common_components/nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

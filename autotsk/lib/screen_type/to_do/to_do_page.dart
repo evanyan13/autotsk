@@ -5,8 +5,9 @@ import "package:autotsk/util/color.dart";
 import 'package:autotsk/screen_type/common_components/side_bar.dart';
 import 'package:autotsk/screen_type/common_components/nav_bar_dark.dart';
 
-class CalendarPage extends StatelessWidget {
-  const CalendarPage({super.key});
+
+class ToDoPage extends StatelessWidget {
+  const ToDoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class CalendarPage extends StatelessWidget {
       drawer: SideBar(),
       body: Center(
           child: Text(
-        "Calendar Page",
+        "To-Do Page",
         style: TextStyle(
           fontFamily: 'Neometric',
           fontWeight: FontWeight.bold,

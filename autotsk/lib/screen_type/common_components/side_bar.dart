@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/screen_type/calendar/calendar_page.dart';
-import 'package:autotsk/screen_type/to_do_page.dart';
+import 'package:autotsk/screen_type/to_do/to_do_page.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({super.key});
