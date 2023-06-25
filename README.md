@@ -1,4 +1,2 @@
 # coolSpotBros
-- test
-- test2
 
