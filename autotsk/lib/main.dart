@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:autotsk/screen_type/calendar/calendar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/screen_type/signin_page.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.white),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: CalendarPage(),
       debugShowCheckedModeBanner: false,
     );
   }

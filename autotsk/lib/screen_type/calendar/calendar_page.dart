@@ -1,37 +1,40 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:flutter/material.dart';
-import 'package:autotsk/util/color.dart';
-import 'package:autotsk/screen_type/home/components/body.dart';
+import "package:flutter/material.dart";
+import "package:autotsk/util/color.dart";
 import 'package:autotsk/screen_type/common_compents/side_bar.dart';
-import 'package:autotsk/screen_type/common_compents/nav_bar.dart';
+import 'package:autotsk/screen_type/common_compents/nav_bar_dark.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class CalendarPage extends StatelessWidget {
+  const CalendarPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: homePageBgDarkPurpleClr,
+      backgroundColor: mainLightBgColour,
       appBar: buildAppBar(),
       drawer: SideBar(),
-      body: Body(),
-      bottomNavigationBar: NavBar(),
+      body: Center(
+          child: Text(
+        "Calendar Page",
+        style: TextStyle(
+          fontFamily: 'Neometric',
+          fontWeight: FontWeight.bold,
+          fontSize: 24,
+          color: Colors.black,
+        ),
+      )),
+      bottomNavigationBar: NavBarDark(),
     );
   }
 
   AppBar buildAppBar() {
     return AppBar(
-      title: Image.asset("assets/LogoLight.png"),
+      title: Image.asset("assets/logobg.png"),
       centerTitle: true,
-      backgroundColor: homePageBgDarkPurpleClr,
+      backgroundColor: mainLightBgColour,
       elevation: 0,
+      iconTheme: IconThemeData(color: darkBlueClr),
       actions: <Widget>[
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),
