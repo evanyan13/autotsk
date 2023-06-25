@@ -34,7 +34,7 @@ class CalendarPage extends StatelessWidget {
       centerTitle: true,
       backgroundColor: mainLightBgColour,
       elevation: 0,
-      iconTheme: IconThemeData(color: darkBlueClr),
+      iconTheme: IconThemeData(color: white),
       actions: <Widget>[
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),

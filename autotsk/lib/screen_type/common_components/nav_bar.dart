@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:autotsk/util/color.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -11,7 +12,7 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  var _currentIndex = 0;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {

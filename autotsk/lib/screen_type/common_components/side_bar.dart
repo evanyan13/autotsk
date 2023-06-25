@@ -12,7 +12,7 @@ class SideBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         child: Container(
-            color: darkBlueClr,
+            color: white,
             child: ListView(children: [
               UserAccountsDrawerHeader(
                 accountName: Text(
@@ -37,7 +37,7 @@ class SideBar extends StatelessWidget {
                       radius: 32,
                     )),
                 decoration: BoxDecoration(
-                  color: darkBlueClr,
+                  color: white,
                 ),
               ),
               ListTile(
