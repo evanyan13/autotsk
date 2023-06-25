@@ -57,20 +57,7 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/businessguy.png
-    - assets/signin.png
-    - assets/logobg.png
-    - assets/Person1.png
-    - assets/avatar2.png
-    - assets/LogoLight.png
-    - assets/pwIcon.png
-    - assets/Usericon.png
-    - assets/emailIcon.png
-    - assets/Appleicon.png
-    - assets/Googleicon.png
-    - assets/strLine.png
-    - assets/darkEmail.png
-    - assets/cross-circle.png
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
