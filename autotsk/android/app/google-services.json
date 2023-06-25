@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "850984528124",
+    "project_id": "autotsk-e8bb3",
+    "storage_bucket": "autotsk-e8bb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850984528124:android:eb92ffe5154fbb2435cf79",
+        "android_client_info": {
+          "package_name": "com.example.autotsk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850984528124-m7nab4o1srnsqjo9enmud9scsk7n3odm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCN6RkjbcW4XHz56CZUst8SInArWVefUN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850984528124-m7nab4o1srnsqjo9enmud9scsk7n3odm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -19,3 +19,4 @@ const buttonLightBlueClr = Color.fromRGBO(55, 203, 243, 1);
 const white = Color.fromRGBO(15, 34, 83, 1);
 const crossbuttonColor = Color.fromRGBO(15, 37, 83, 1);
 const catColor = Color.fromRGBO(83, 80, 213, 1);
+const transparentBgColor = Color.fromARGB(10, 15, 37, 83);
