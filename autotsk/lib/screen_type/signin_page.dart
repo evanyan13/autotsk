@@ -163,7 +163,7 @@ class _SigninState extends State<Signin> {
                                 hintText: 'Enter your Password',
                                 textInputType: TextInputType.text,
                                 isPassW: true,
-                                icon: Icon(Icons.password),
+                                icon: Icon(Icons.perm_device_info),
                               ),
                             ),
                             Container(
