@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: "/onboarding",
       routes: {
         '/ob1': (context) => OnboardingFirst(),
         '/ob2': (context) => OnboardingSecond(),
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
             // it means user has been authenticated
             if (snapshot.hasData) {
               print(snapshot.data);
-              return AddTask();
+              return HomePage();
             } else if (snapshot.hasError) {
               return Center(child: Text('${snapshot.error}'));
             }
@@ -67,7 +68,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: mainLightBgColour2,
         primaryColor: darkPurpleClr,
-        textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.white),
+        textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.black),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,

@@ -5,7 +5,7 @@ import 'package:autotsk/util/text_input_field.dart';
 import 'package:autotsk/animation/custom_rect_tween.dart';
 import 'package:autotsk/routing/hero_dialog_route.dart';
 import 'package:autotsk/auth/auth_methods.dart';
-import 'package:autotsk/screen_type/home_page.dart';
+import 'package:autotsk/screen_type/home/home_page.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
 
 // dimensions, width: 365, height: 623
@@ -53,7 +53,7 @@ class _SigninState extends State<Signin> {
 
     if (resp == 'success') {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => const Home(),
+        builder: (context) => const HomePage(),
       ));
     }
   }
