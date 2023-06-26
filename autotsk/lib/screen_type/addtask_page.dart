@@ -33,6 +33,8 @@ class _AddTaskState extends State<AddTask> {
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
+
+    print(snap.data());
   }
 
   @override
@@ -146,6 +148,7 @@ class _AddTaskState extends State<AddTask> {
                     textEditingController: _titleController,
                     hintText: 'Add a title',
                     textInputType: TextInputType.text,
+                    icon: Icon(Icons.title),
                   ),
                 ),
                 SizedBox(height: 20),
@@ -177,6 +180,7 @@ class _AddTaskState extends State<AddTask> {
                                   textEditingController: _dateController,
                                   hintText: 'Add a Date',
                                   textInputType: TextInputType.text,
+                                  icon: Icon(Icons.calendar_month),
                                 ),
                               ),
                             ],
@@ -208,8 +212,9 @@ class _AddTaskState extends State<AddTask> {
                                 width: 141,
                                 child: TextInputField(
                                   textEditingController: _priorController,
-                                  hintText: 'Priority level',
+                                  hintText: 'Priority',
                                   textInputType: TextInputType.text,
+                                  icon: Icon(Icons.low_priority_sharp),
                                 ),
                               ),
                             ],
@@ -323,6 +328,7 @@ class _AddTaskState extends State<AddTask> {
                     textEditingController: _locController,
                     hintText: 'Enter address',
                     textInputType: TextInputType.text,
+                    icon: Icon(Icons.location_on),
                   ),
                 ),
                 SizedBox(height: 15),

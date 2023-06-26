@@ -5,7 +5,7 @@ import 'package:autotsk/util/text_input_field.dart';
 import 'package:autotsk/animation/custom_rect_tween.dart';
 import 'package:autotsk/routing/hero_dialog_route.dart';
 import 'package:autotsk/auth/auth_methods.dart';
-import 'package:autotsk/screen_type/home_page.dart';
+import 'package:autotsk/screen_type/home/home_page.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
 
 // dimensions, width: 365, height: 623
@@ -24,11 +24,6 @@ class _SigninState extends State<Signin> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passWController = TextEditingController();
   bool _isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -53,7 +48,7 @@ class _SigninState extends State<Signin> {
 
     if (resp == 'success') {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => const Home(),
+        builder: (context) => const HomePage(),
       ));
     }
   }
@@ -129,6 +124,7 @@ class _SigninState extends State<Signin> {
                                 textEditingController: _emailController,
                                 hintText: 'Enter your Email',
                                 textInputType: TextInputType.text,
+                                icon: Icon(Icons.email),
                               ),
                             ),
                             Container(
@@ -167,6 +163,7 @@ class _SigninState extends State<Signin> {
                                 hintText: 'Enter your Password',
                                 textInputType: TextInputType.text,
                                 isPassW: true,
+                                icon: Icon(Icons.password),
                               ),
                             ),
                             Container(
