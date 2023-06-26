@@ -9,6 +9,10 @@ import 'package:autotsk/screen_type/home/components/body.dart';
 import 'package:autotsk/screen_type/common_components/side_bar.dart';
 import 'package:autotsk/screen_type/common_components/nav_bar.dart';
 import 'package:autotsk/main.dart';
+import 'package:autotsk/screen_type/calendar/calendar_page.dart';
+import 'package:autotsk/screen_type/to_do/to_do_page.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:autotsk/screen_type/addtask_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,20 +22,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String username = "";
+  late PageController _pageController;
+  int _currentIndex = 0;
+  int _previousIndex = 0;
+  bool isLight = false;
+  List<Widget> pageList = [
+    Body(),
+    CalendarPage(),
+    ToDoPage(),
+    Body(),
+  ];
 
   @override
   void initState() {
     super.initState();
-    getUser();
+    _pageController = PageController();
   }
 
-  void getUser() async {
-    DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-    print(snap.data());
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -40,16 +51,133 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: homePageBgDarkPurpleClr,
       appBar: buildAppBar(),
       drawer: SideBar(),
-      body: Body(),
-      bottomNavigationBar: NavBar(),
+      body: SizedBox.expand(
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(
+              () {
+                _currentIndex = index;
+              },
+            );
+          },
+          children: <Widget>[
+            Body(),
+            CalendarPage(),
+            pageList[_previousIndex == 4 ? _previousIndex - 1 : _previousIndex],
+            ToDoPage(),
+            Body(),
+          ],
+        ),
+      ),
+      bottomNavigationBar: SalomonBottomBar(
+        backgroundColor: isLight ? mainLightBgColour : homePageBgDarkPurpleClr,
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _previousIndex = _currentIndex;
+            _currentIndex = index;
+            if (_currentIndex == 1 || _currentIndex == 3) {
+              isLight = true;
+            } else if (_currentIndex == 0 || _currentIndex == 4) {
+              isLight = false;
+            } else if (_currentIndex == 2) {
+              if (_previousIndex == 1 || _previousIndex == 3) {
+                isLight = true;
+              } else if (_previousIndex == 2 || _previousIndex == 4) {
+                isLight = false;
+              }
+            }
+
+            if (_currentIndex == 2) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => AddTask()),
+                ),
+              );
+
+              _pageController.jumpToPage(_previousIndex);
+            } else {
+              _pageController.jumpToPage(_currentIndex);
+            }
+          });
+        },
+        items: isLight
+            ? [
+                SalomonBottomBarItem(
+                  icon: Icon(Icons.home),
+                  title: Text("Home"),
+                  selectedColor: Colors.blue,
+                  unselectedColor: white,
+                ),
+                SalomonBottomBarItem(
+                  icon: Icon(Icons.calendar_month),
+                  title: Text("Calendar"),
+                  selectedColor: Colors.blue,
+                  unselectedColor: white,
+                ),
+                SalomonBottomBarItem(
+                  icon: Icon(Icons.add_circle),
+                  title: Text("Add task"),
+                  selectedColor: Colors.blue,
+                  unselectedColor: white,
+                ),
+                SalomonBottomBarItem(
+                  icon: Icon(Icons.list_rounded),
+                  title: Text("To-Do"),
+                  selectedColor: Colors.blue,
+                  unselectedColor: white,
+                ),
+                SalomonBottomBarItem(
+                  icon: Icon(Icons.alarm_rounded),
+                  title: Text("Reminder"),
+                  selectedColor: Colors.blue,
+                  unselectedColor: white,
+                ),
+              ]
+            : [
+                SalomonBottomBarItem(
+                  icon: Icon(Icons.home),
+                  title: Text("Home"),
+                  selectedColor: Colors.lightBlue,
+                  unselectedColor: Colors.white,
+                ),
+                SalomonBottomBarItem(
+                  icon: Icon(Icons.calendar_month),
+                  title: Text("Calendar"),
+                  selectedColor: Colors.lightBlue,
+                  unselectedColor: Colors.white,
+                ),
+                SalomonBottomBarItem(
+                  icon: Icon(Icons.add_circle),
+                  title: Text("Add task"),
+                  selectedColor: Colors.lightBlue,
+                  unselectedColor: Colors.white,
+                ),
+                SalomonBottomBarItem(
+                  icon: Icon(Icons.list_rounded),
+                  title: Text("To-Do"),
+                  selectedColor: Colors.lightBlue,
+                  unselectedColor: Colors.white,
+                ),
+                SalomonBottomBarItem(
+                  icon: Icon(Icons.alarm_rounded),
+                  title: Text("Reminder"),
+                  selectedColor: Colors.lightBlue,
+                  unselectedColor: Colors.white,
+                ),
+              ],
+      ),
     );
   }
 
   AppBar buildAppBar() {
     return AppBar(
-      title: Image.asset("assets/LogoLight.png"),
+      title: isLight
+          ? Image.asset("assets/logobg.png")
+          : Image.asset("assets/LogoLight.png"),
       centerTitle: true,
-      backgroundColor: homePageBgDarkPurpleClr,
+      backgroundColor: isLight ? mainLightBgColour : homePageBgDarkPurpleClr,
       elevation: 0,
       actions: <Widget>[
         Padding(

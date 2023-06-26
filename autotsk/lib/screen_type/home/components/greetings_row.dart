@@ -22,7 +22,7 @@ class GreetingRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Hi Zhong Kai !",
+                      "Hi Zhong Kai!",
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Neometric',

@@ -11,6 +11,7 @@ class SideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+        backgroundColor: Colors.white,
         child: Container(
             color: white,
             child: ListView(children: [

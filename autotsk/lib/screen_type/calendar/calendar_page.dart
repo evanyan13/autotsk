@@ -12,7 +12,6 @@ class CalendarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: mainLightBgColour,
-      appBar: buildAppBar(),
       drawer: SideBar(),
       body: Center(
           child: Text(
@@ -21,10 +20,9 @@ class CalendarPage extends StatelessWidget {
           fontFamily: 'Neometric',
           fontWeight: FontWeight.bold,
           fontSize: 24,
-          color: Colors.black,
+          color: homePageBgDarkPurpleClr,
         ),
       )),
-      bottomNavigationBar: NavBarDark(),
     );
   }
 
@@ -34,7 +32,7 @@ class CalendarPage extends StatelessWidget {
       centerTitle: true,
       backgroundColor: mainLightBgColour,
       elevation: 0,
-      iconTheme: IconThemeData(color: white),
+      iconTheme: IconThemeData(color: Colors.black),
       actions: <Widget>[
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),

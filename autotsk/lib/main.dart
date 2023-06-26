@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/signin',
+      initialRoute: '/home',
       routes: {
         '/ob1': (context) => OnboardingFirst(),
         '/ob2': (context) => OnboardingSecond(),
@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignUp(),
         '/onboarding': (context) => PageV(),
         '/addtaskform': (context) => AddTask(),
+        '/home': (context) => HomePage(),
       },
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
