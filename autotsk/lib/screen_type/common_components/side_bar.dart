@@ -13,7 +13,7 @@ class SideBar extends StatelessWidget {
     return Drawer(
         backgroundColor: Colors.white,
         child: Container(
-            color: white,
+            color: homePageBgDarkPurpleClr,
             child: ListView(children: [
               UserAccountsDrawerHeader(
                 accountName: Text(
@@ -38,7 +38,7 @@ class SideBar extends StatelessWidget {
                       radius: 32,
                     )),
                 decoration: BoxDecoration(
-                  color: white,
+                  color: homePageBgDarkPurpleClr,
                 ),
               ),
               ListTile(
@@ -59,9 +59,6 @@ class SideBar extends StatelessWidget {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => CalendarPage()));
                   }),
-              Divider(
-                color: Colors.white,
-              ),
               ListTile(
                   leading: Icon(
                     Icons.share_rounded,
@@ -80,9 +77,6 @@ class SideBar extends StatelessWidget {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => ToDoPage()));
                   }),
-              Divider(
-                color: Colors.white,
-              ),
               ListTile(
                   leading: Icon(
                     Icons.feedback_rounded,
@@ -118,9 +112,6 @@ class SideBar extends StatelessWidget {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => ToDoPage()));
                   }),
-              Divider(
-                color: Colors.white,
-              ),
               ListTile(
                   leading: Icon(
                     Icons.help,
@@ -139,9 +130,6 @@ class SideBar extends StatelessWidget {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => ToDoPage()));
                   }),
-              Divider(
-                color: Colors.white,
-              ),
               ListTile(
                   leading: Icon(
                     Icons.logout,

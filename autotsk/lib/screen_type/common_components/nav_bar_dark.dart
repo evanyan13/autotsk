@@ -19,35 +19,34 @@ class _NavBarDarkState extends State<NavBarDark> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SalomonBottomBar(
-        currentIndex: _currentIndex,
-        onTap: (i) => setState(() => _currentIndex = i),
-        items: [
-          SalomonBottomBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Home"),
-            selectedColor: Colors.blue,
-            unselectedColor: white,
-          ),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.calendar_month),
-            title: Text("Calendar"),
-            selectedColor: Colors.blue,
-            unselectedColor: white,
-          ),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.list_rounded),
-            title: Text("To-Do"),
-            selectedColor: Colors.blue,
-            unselectedColor: white,
-          ),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.alarm_rounded),
-            title: Text("Reminder"),
-            selectedColor: Colors.blue,
-            unselectedColor: white,
-          ),
-        ],
-      ),
+          currentIndex: _currentIndex,
+          onTap: (i) => setState(() => _currentIndex = i),
+          items: [
+            SalomonBottomBarItem(
+              icon: Icon(Icons.home),
+              title: Text("Home"),
+              selectedColor: Colors.blue,
+              unselectedColor: darkPurpleClr,
+            ),
+            SalomonBottomBarItem(
+              icon: Icon(Icons.calendar_month),
+              title: Text("Calendar"),
+              selectedColor: Colors.blue,
+              unselectedColor: darkPurpleClr,
+            ),
+            SalomonBottomBarItem(
+              icon: Icon(Icons.list_rounded),
+              title: Text("To-Do"),
+              selectedColor: Colors.blue,
+              unselectedColor: darkPurpleClr,
+            ),
+            SalomonBottomBarItem(
+              icon: Icon(Icons.alarm_rounded),
+              title: Text("Reminder"),
+              selectedColor: Colors.blue,
+              unselectedColor: darkPurpleClr,
+            ),
+          ]),
     );
   }
 }
