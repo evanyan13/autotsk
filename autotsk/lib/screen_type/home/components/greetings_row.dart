@@ -2,11 +2,36 @@
 
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class GreetingRow extends StatelessWidget {
-  const GreetingRow({
-    super.key,
-  });
+class GreetingRow extends StatefulWidget {
+  const GreetingRow({super.key});
+
+  @override
+  State<GreetingRow> createState() => _GreetingRowState();
+}
+
+class _GreetingRowState extends State<GreetingRow> {
+  String username = "";
+
+  @override
+  void initState() {
+    super.initState();
+    getUsername();
+  }
+
+  void getUsername() async {
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    setState(() {
+      username = (snap.data()! as Map<String, dynamic>)['username'];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +47,7 @@ class GreetingRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Hi Zhong Kai!",
+                      "Hi $username!",
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Neometric',

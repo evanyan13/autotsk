@@ -25,16 +25,6 @@ class _AddTaskState extends State<AddTask> {
   @override
   void initState() {
     super.initState();
-    getUserInfo();
-  }
-
-  void getUserInfo() async {
-    DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-
-    print(snap.data());
   }
 
   @override
