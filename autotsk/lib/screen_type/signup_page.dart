@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:autotsk/animation/custom_rect_tween.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
@@ -294,7 +296,7 @@ class _SignUpState extends State<SignUp> {
                           'Sign Up with Google or Apple',
                           style: TextStyle(
                             fontSize: 15,
-                            fontFamily: "Neometric",
+                            fontFamily: "Neometric",                        
                           ),
                         ),
 
