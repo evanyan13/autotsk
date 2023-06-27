@@ -129,6 +129,7 @@ class _SignUpState extends State<SignUp> {
                                 textEditingController: _usernameController,
                                 hintText: 'Enter your Username',
                                 textInputType: TextInputType.text,
+                                icon: Icon(Icons.person),
                               ),
                             ),
                             Container(
@@ -166,6 +167,7 @@ class _SignUpState extends State<SignUp> {
                                 textEditingController: _emailController,
                                 hintText: 'Enter your Email',
                                 textInputType: TextInputType.text,
+                                icon: Icon(Icons.email),
                               ),
                             ),
                             Container(
@@ -204,6 +206,7 @@ class _SignUpState extends State<SignUp> {
                                 hintText: 'Enter your Password',
                                 textInputType: TextInputType.text,
                                 isPassW: true,
+                                icon: Icon(Icons.perm_device_info),
                               ),
                             ),
                             Container(

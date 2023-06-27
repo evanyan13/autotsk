@@ -4,15 +4,7 @@ import 'package:autotsk/animation/custom_rect_tween.dart';
 import 'package:autotsk/routing/hero_dialog_route.dart';
 import 'package:autotsk/screen_type/signin_page.dart';
 
-/// {@template add_todo_button}
-/// Button to add a new [Todo].
-///
-/// Opens a [HeroDialogRoute] of [_AddTodoPopupCard].
-///
-/// Uses a [Hero] with tag [_heroAddTodo].
-/// {@endtemplate}
 class transitionButton extends StatelessWidget {
-  /// {@macro add_todo_button}
   const transitionButton({Key? key}) : super(key: key);
 
   @override

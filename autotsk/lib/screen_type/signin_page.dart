@@ -26,11 +26,6 @@ class _SigninState extends State<Signin> {
   bool _isLoading = false;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
@@ -129,6 +124,7 @@ class _SigninState extends State<Signin> {
                                 textEditingController: _emailController,
                                 hintText: 'Enter your Email',
                                 textInputType: TextInputType.text,
+                                icon: Icon(Icons.email),
                               ),
                             ),
                             Container(
@@ -167,6 +163,7 @@ class _SigninState extends State<Signin> {
                                 hintText: 'Enter your Password',
                                 textInputType: TextInputType.text,
                                 isPassW: true,
+                                icon: Icon(Icons.perm_device_info),
                               ),
                             ),
                             Container(

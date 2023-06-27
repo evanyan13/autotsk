@@ -1,4 +1,3 @@
-
 import 'package:autotsk/onboarding/ob1.dart';
 import 'package:autotsk/onboarding/ob2.dart';
 import 'package:autotsk/onboarding/ob3.dart';
@@ -48,8 +47,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.active) {
             // it means user has been authenticated
             if (snapshot.hasData) {
-              print(snapshot.data);
-              return HomePage();
+              return const HomePage();
             } else if (snapshot.hasError) {
               return Center(child: Text('${snapshot.error}'));
             }

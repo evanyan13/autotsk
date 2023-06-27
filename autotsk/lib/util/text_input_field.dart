@@ -9,6 +9,7 @@ class TextInputField extends StatelessWidget {
   final String hintText;
   final TextInputType textInputType;
   final Color bgColor;
+  final Icon icon;
   const TextInputField({
     Key? key,
     required this.textEditingController,
@@ -16,6 +17,7 @@ class TextInputField extends StatelessWidget {
     required this.textInputType,
     this.isPassW = false,
     this.bgColor = whiteColour,
+    required this.icon,
   }) : super(key: key);
 
   @override
@@ -36,6 +38,7 @@ class TextInputField extends StatelessWidget {
         filled: true,
         contentPadding: const EdgeInsets.all(8.0),
         fillColor: bgColor,
+        prefixIcon: icon,
       ),
       keyboardType: textInputType,
       obscureText: isPassW,
