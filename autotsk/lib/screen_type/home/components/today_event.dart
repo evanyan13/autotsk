@@ -13,12 +13,13 @@ class TodayEvent extends StatefulWidget {
 }
 
 class _TodayEventState extends State<TodayEvent> {
-  int activeIndex = 0;
+  int activeIndex = 1;
   final controller = CarouselController();
   final items = [
     "Item 1",
     "Item 2",
     "Item 3",
+    "Item 4",
   ];
 
   @override

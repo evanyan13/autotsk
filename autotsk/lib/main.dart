@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignUp(),
         '/onboarding': (context) => PageV(),
         '/addtaskform': (context) => AddTask(),
+        '/home': (context) => HomePage(),
       },
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),

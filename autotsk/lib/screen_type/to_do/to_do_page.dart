@@ -5,7 +5,6 @@ import "package:autotsk/util/color.dart";
 import 'package:autotsk/screen_type/common_components/side_bar.dart';
 import 'package:autotsk/screen_type/common_components/nav_bar_dark.dart';
 
-
 class ToDoPage extends StatelessWidget {
   const ToDoPage({super.key});
 
@@ -13,19 +12,19 @@ class ToDoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: mainLightBgColour,
-      appBar: buildAppBar(),
       drawer: SideBar(),
       body: Center(
-          child: Text(
-        "To-Do Page",
-        style: TextStyle(
-          fontFamily: 'Neometric',
-          fontWeight: FontWeight.bold,
-          fontSize: 24,
-          color: Colors.black,
+        child: Text(
+          "To-Do Page",
+          style: TextStyle(
+            fontFamily: 'Neometric',
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+            color: homePageBgDarkPurpleClr,
+          ),
         ),
-      )),
-      bottomNavigationBar: NavBarDark(),
+      ),
+      // bottomNavigationBar: NavBarDark(),
     );
   }
 

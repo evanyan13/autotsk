@@ -15,19 +15,24 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: homePageBgDarkPurpleClr,
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        GreetingRow(),
-        Column(children: [
-          TodayTitle(),
-          TodayEvent(),
-        ]),
-        Column(
-          children: [
-            MeetingTitle(),
-            MeetingEvent(),
-          ],
-        )
-      ]),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GreetingRow(),
+          Column(
+            children: [
+              TodayTitle(),
+              TodayEvent(),
+            ],
+          ),
+          Column(
+            children: [
+              MeetingTitle(),
+              MeetingEvent(),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
