@@ -97,66 +97,19 @@ class _OnboardingSecondState extends State<OnboardingSecond> {
                 ),
 
                 Positioned(
-                  child: Stack(
-                    children: <Widget>[
-                      // sign in button
-                      Image(
-                        image: AssetImage('assets/signin.png'),
-                      ),
-
-                      Stack(
-                        children: <Widget>[
-                          Positioned(
-                            child: Text(
-                              'Sign in',
-                              style: TextStyle(
-                                fontFamily: 'Neometric',
-                                fontSize: 20,
-                                color: mainLightBgColour,
-                              ),
-                            ),
-                            left: 40,
-                            top: 15,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        HeroDialogRoute(
+                          builder: (context) => Center(
+                            child: Signin(),
                           ),
-                          Opacity(
-                            opacity: 0,
-                            child: Container(
-                              child: FractionallySizedBox(
-                                alignment: Alignment.center,
-                                widthFactor: 1.0,
-                                heightFactor: 1.0,
-                                child: FloatingActionButton(
-                                  onPressed: () {
-                                    // TO REMOVE
-                                    Navigator.of(context).push(
-                                      HeroDialogRoute(
-                                        builder: (context) => Center(
-                                          child: Signin(),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                                /* shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(20.0),
-                                  ),
-                                ), */
-                              ),
-                              margin: EdgeInsets.fromLTRB(4.0, 0.0, 0.0, 0.0),
-                              height: 60,
-                              width: 130,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20.0),
-                                ),
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                        ),
+                      );
+                    },
+                    child: Image(
+                      image: AssetImage('assets/signinButton.png'),
+                    ),
                   ),
                   bottom: -30,
                   left: 200,
