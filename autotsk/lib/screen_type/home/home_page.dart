@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     Body(),
     CalendarPage(),
     ToDoPage(),
-    Body(),
+    Container(color: Colors.black),
   ];
 
   @override
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             CalendarPage(),
             pageList[_previousIndex == 4 ? _previousIndex - 1 : _previousIndex],
             ToDoPage(),
-            Body(),
+            SizedBox.expand(),
           ],
         ),
       ),
@@ -108,31 +108,31 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(Icons.home),
                   title: Text("Home"),
                   selectedColor: Colors.blue,
-                  unselectedColor: white,
+                  unselectedColor: darkBlueClr,
                 ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.calendar_month),
                   title: Text("Calendar"),
                   selectedColor: Colors.blue,
-                  unselectedColor: white,
+                  unselectedColor: darkBlueClr,
                 ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.add_circle),
                   title: Text("Add task"),
                   selectedColor: Colors.blue,
-                  unselectedColor: white,
+                  unselectedColor: darkBlueClr,
                 ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.list_rounded),
                   title: Text("To-Do"),
                   selectedColor: Colors.blue,
-                  unselectedColor: white,
+                  unselectedColor: darkBlueClr,
                 ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.alarm_rounded),
                   title: Text("Reminder"),
                   selectedColor: Colors.blue,
-                  unselectedColor: white,
+                  unselectedColor: darkBlueClr,
                 ),
               ]
             : [
