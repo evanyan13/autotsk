@@ -42,6 +42,10 @@ class _AddTaskState extends State<AddTask> {
       location: _locController.text,
       notes: _notesController.text,
     );
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   Future<String> userId() async {
@@ -381,6 +385,7 @@ class _AddTaskState extends State<AddTask> {
                     onPressed: () {
                       setState(() {
                         AddTasktoDb();
+                        Navigator.of(context).pop(context);
                       });
                     },
                     style: ElevatedButton.styleFrom(
@@ -392,14 +397,23 @@ class _AddTaskState extends State<AddTask> {
                         ),
                       ),
                     ),
-                    child: Text(
-                      'Add Task',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Neometric',
-                      ),
-                    ),
+                    child: _isLoading
+                        ? Container(
+                            height: 40,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: mainLightBgColour,
+                              ),
+                            ),
+                          )
+                        : Text(
+                            'Add Task',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Neometric',
+                            ),
+                          ),
                   ),
                 ),
               ],
