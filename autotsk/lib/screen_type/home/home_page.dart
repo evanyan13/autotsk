@@ -77,6 +77,7 @@ class _HomePageState extends State<HomePage> {
           size: 40,
         ),
         backgroundColor: buttonLightBlueClr,
+        hoverColor: buttondarkBlueClr,
         onPressed: () =>  Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: ((context) => AddTask()),
@@ -90,30 +91,11 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             _previousIndex = _currentIndex;
             _currentIndex = index;
-            if (_currentIndex == 1 || _currentIndex == 2) {
+            if (_currentIndex == 1 || _currentIndex == 2 || _currentIndex == 3) {
               isLight = true;
-            } else if (_currentIndex == 0 || _currentIndex == 3) {
+            } else if (_currentIndex == 0) {
               isLight = false;
             }
-            // } else if (_currentIndex == 2) {
-            //   if (_previousIndex == 1 || _previousIndex == 3) {
-            //     isLight = true;
-            //   } else if (_previousIndex == 2 || _previousIndex == 4) {
-            //     isLight = false;
-            //   }
-            // }
-
-            // if (_currentIndex == 2) {
-            //   Navigator.of(context).push(
-            //     MaterialPageRoute(
-            //       builder: ((context) => AddTask()),
-            //     ),
-            //   );
-
-            //   _pageController.jumpToPage(_previousIndex);
-            // } else {
-            //   _pageController.jumpToPage(_currentIndex);
-            // }
             _pageController.jumpToPage(_currentIndex);
           });
         },
@@ -131,12 +113,6 @@ class _HomePageState extends State<HomePage> {
                   selectedColor: Colors.blue,
                   unselectedColor: buttondarkBlueClr,
                 ),
-                // SalomonBottomBarItem(
-                //   icon: Icon(Icons.add_circle),
-                //   title: Text("Add task"),
-                //   selectedColor: Colors.blue,
-                //   unselectedColor: buttondarkBlueClr,
-                // ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.list_rounded),
                   title: Text("To-Do"),
@@ -163,12 +139,6 @@ class _HomePageState extends State<HomePage> {
                   selectedColor: Colors.lightBlue,
                   unselectedColor: Colors.white,
                 ),
-                // SalomonBottomBarItem(
-                //   icon: Icon(Icons.add_circle),
-                //   title: Text("Add task"),
-                //   selectedColor: Colors.lightBlue,
-                //   unselectedColor: Colors.white,
-                // ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.list_rounded),
                   title: Text("To-Do"),

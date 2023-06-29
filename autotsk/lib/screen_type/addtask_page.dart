@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:autotsk/util/color.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/text_input_field.dart';
@@ -74,24 +76,26 @@ class _AddTaskState extends State<AddTask> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 15),
-                Container(
+                SizedBox(
                   width: 330,
-                  child: Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop(context);
-                        },
-                        child: Image(
-                          image: AssetImage('assets/cross-circle.png'),
-                          width: 35.0,
-                          height: 35.0,
+                  child: Container(
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pop(context);
+                          },
+                          child: Image(
+                            image: AssetImage('assets/cross-circle.png'),
+                            width: 35.0,
+                            height: 35.0,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                    ],
+                        SizedBox(
+                          width: 5,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
 
@@ -150,7 +154,7 @@ class _AddTaskState extends State<AddTask> {
                     ),
                   ),
                 ),
-                SizedBox(height: 5),
+                SizedBox(height: 10),
                 Container(
                   width: 330,
                   alignment: Alignment.centerLeft,
@@ -165,7 +169,7 @@ class _AddTaskState extends State<AddTask> {
                   ),
                 ),
                 SizedBox(height: 3),
-                Container(
+                SizedBox(
                   width: 330,
                   child: TextInputField(
                     textEditingController: _titleController,
@@ -175,77 +179,79 @@ class _AddTaskState extends State<AddTask> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Row(
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Container(
-                          width: 105,
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Date',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Neometric",
-                              letterSpacing: 1.5,
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            width: 105,
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Date',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Neometric",
+                                letterSpacing: 1.5,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 3),
-                        Container(
-                          child: Row(
-                            children: <Widget>[
-                              SizedBox(width: 33),
-                              Container(
-                                width: 141,
-                                child: TextInputField(
-                                  textEditingController: _dateController,
-                                  hintText: 'Add a Date',
-                                  textInputType: TextInputType.text,
-                                  icon: Icon(Icons.calendar_month),
+                          SizedBox(height: 3),
+                          Container(
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(width: 33),
+                                SizedBox(
+                                  width: 141,
+                                  child: TextInputField(
+                                    textEditingController: _dateController,
+                                    hintText: 'Add a Date',
+                                    textInputType: TextInputType.text,
+                                    icon: Icon(Icons.calendar_month),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Container(
-                          width: 100,
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Priority',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Neometric",
-                              letterSpacing: 1.5,
+                              ],
                             ),
                           ),
-                        ),
-                        SizedBox(height: 3),
-                        Container(
-                          child: Row(
-                            children: <Widget>[
-                              SizedBox(width: 45),
-                              Container(
-                                width: 141,
-                                child: TextInputField(
-                                  textEditingController: _priorController,
-                                  hintText: 'Priority',
-                                  textInputType: TextInputType.text,
-                                  icon: Icon(Icons.low_priority_sharp),
-                                ),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            width: 100,
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Priority',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Neometric",
+                                letterSpacing: 1.5,
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          SizedBox(height: 3),
+                          Container(
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(width: 45),
+                                SizedBox(
+                                  width: 141,
+                                  child: TextInputField(
+                                    textEditingController: _priorController,
+                                    hintText: 'Priority',
+                                    textInputType: TextInputType.text,
+                                    icon: Icon(Icons.low_priority_sharp),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 Column(
                   children: <Widget>[
@@ -264,70 +270,72 @@ class _AddTaskState extends State<AddTask> {
                       ),
                     ),
                     SizedBox(height: 5),
-                    Row(
-                      children: [
-                        SizedBox(width: 28),
-                        SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: buttondarkBlueClr,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(50.0),
+                    Container(
+                      child: Row(
+                        children: [
+                          SizedBox(width: 28),
+                          SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: buttondarkBlueClr,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(50.0),
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                '+',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Neometric",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 35,
                                 ),
                               ),
                             ),
-                            child: Text(
-                              '+',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Neometric",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 35,
+                          ),
+                          SizedBox(width: 15),
+                          Container(
+                            width: 80,
+                            height: 40,
+                            clipBehavior: Clip.none,
+                            decoration: BoxDecoration(
+                              color: buttonLightBlueClr,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 15),
-                        Container(
-                          width: 80,
-                          height: 40,
-                          clipBehavior: Clip.none,
-                          decoration: BoxDecoration(
-                            color: buttonLightBlueClr,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
+                          SizedBox(width: 15),
+                          Container(
+                            width: 80,
+                            height: 40,
+                            clipBehavior: Clip.none,
+                            decoration: BoxDecoration(
+                              color: buttonLightBlueClr,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 15),
-                        Container(
-                          width: 80,
-                          height: 40,
-                          clipBehavior: Clip.none,
-                          decoration: BoxDecoration(
-                            color: buttonLightBlueClr,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
+                          SizedBox(width: 15),
+                          Container(
+                            width: 80,
+                            height: 40,
+                            clipBehavior: Clip.none,
+                            decoration: BoxDecoration(
+                              color: buttonLightBlueClr,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 15),
-                        Container(
-                          width: 80,
-                          height: 40,
-                          clipBehavior: Clip.none,
-                          decoration: BoxDecoration(
-                            color: buttonLightBlueClr,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

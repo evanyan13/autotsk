@@ -1,6 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
-import 'package:autotsk/services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/screen_type/calendar/calendar_page.dart';

@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 import "package:flutter/material.dart";
 import "package:autotsk/util/color.dart";
 import 'package:autotsk/screen_type/common_components/side_bar.dart';
-import 'package:autotsk/screen_type/common_components/nav_bar_dark.dart';
 
 class CalendarPage extends StatelessWidget {
   const CalendarPage({super.key});
@@ -11,19 +11,28 @@ class CalendarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mainLightBgColour,
-      drawer: SideBar(),
-      body: Center(
-          child: Text(
-        "Calendar Page",
-        style: TextStyle(
-          fontFamily: 'Neometric',
-          fontWeight: FontWeight.bold,
-          fontSize: 24,
-          color: homePageBgDarkPurpleClr,
-        ),
-      )),
-    );
+        backgroundColor: mainLightBgColour,
+        drawer: SideBar(),
+        body: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 16, left: 16),
+              child: DatePicker(
+                DateTime.now(),
+                height: 100,
+                width: 80,
+                initialSelectedDate: DateTime.now(),
+                selectionColor: buttondarkPurpleClr,
+                selectedTextColor: Colors.white,
+                dateTextStyle: TextStyle(
+                  fontFamily: 'Neometric',
+                  fontWeight: FontWeight.normal,
+                  fontSize: 20,
+                ),
+              ),
+            )
+          ],
+        ));
   }
 
   AppBar buildAppBar() {

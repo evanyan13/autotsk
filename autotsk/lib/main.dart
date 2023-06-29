@@ -2,10 +2,7 @@
 import 'package:autotsk/onboarding/ob1.dart';
 import 'package:autotsk/onboarding/ob2.dart';
 import 'package:autotsk/onboarding/ob3.dart';
-import 'package:autotsk/screen_type/home/home_test.dart';
-import 'package:autotsk/services/theme_service.dart';
 import 'package:autotsk/util/color.dart';
-import 'package:autotsk/util/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/screen_type/signin_page.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
@@ -14,8 +11,6 @@ import 'package:autotsk/onboarding/pageview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:autotsk/screen_type/home/home_page.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

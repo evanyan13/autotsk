@@ -1,6 +1,4 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'package:autotsk/util/themes.dart';
 import 'package:flutter/material.dart';
 
 class TaskTitle extends StatelessWidget {
@@ -18,7 +16,12 @@ class TaskTitle extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Today's Event",
-                    style: headingStyleWhite,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Neometric',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
                   ),
                 ],
               )),
@@ -27,7 +30,12 @@ class TaskTitle extends StatelessWidget {
             onPressed: () {},
             child: Text(
               "View All",
-              style: bodyStyle,
+              style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Neometric',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
             ),
           )
         ],
