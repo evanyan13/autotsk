@@ -273,7 +273,7 @@ class _AddTaskState extends State<AddTask> {
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: crossbuttonColor,
+                              backgroundColor: buttondarkBlueClr,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(50.0),
@@ -297,7 +297,7 @@ class _AddTaskState extends State<AddTask> {
                           height: 40,
                           clipBehavior: Clip.none,
                           decoration: BoxDecoration(
-                            color: catColor,
+                            color: buttonLightBlueClr,
                             borderRadius: BorderRadius.all(
                               Radius.circular(10.0),
                             ),
@@ -309,7 +309,7 @@ class _AddTaskState extends State<AddTask> {
                           height: 40,
                           clipBehavior: Clip.none,
                           decoration: BoxDecoration(
-                            color: catColor,
+                            color: buttonLightBlueClr,
                             borderRadius: BorderRadius.all(
                               Radius.circular(10.0),
                             ),
@@ -321,7 +321,7 @@ class _AddTaskState extends State<AddTask> {
                           height: 40,
                           clipBehavior: Clip.none,
                           decoration: BoxDecoration(
-                            color: catColor,
+                            color: buttonLightBlueClr,
                             borderRadius: BorderRadius.all(
                               Radius.circular(10.0),
                             ),
@@ -389,7 +389,7 @@ class _AddTaskState extends State<AddTask> {
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: crossbuttonColor,
+                      backgroundColor: buttondarkBlueClr,
                       padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(

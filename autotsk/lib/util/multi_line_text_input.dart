@@ -15,7 +15,7 @@ class MultiLineText extends StatelessWidget {
     required this.hintText,
     required this.textInputType,
     this.isPassW = false,
-    this.bgColor = whiteColour,
+    this.bgColor = Colors.white,
   }) : super(key: key);
 
   @override

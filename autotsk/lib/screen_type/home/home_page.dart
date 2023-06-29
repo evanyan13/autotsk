@@ -11,8 +11,9 @@ import 'package:autotsk/screen_type/common_components/nav_bar.dart';
 import 'package:autotsk/main.dart';
 import 'package:autotsk/screen_type/calendar/calendar_page.dart';
 import 'package:autotsk/screen_type/to_do/to_do_page.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:autotsk/screen_type/reminder/reminder_page.dart';
 import 'package:autotsk/screen_type/addtask_page.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     Body(),
     CalendarPage(),
     ToDoPage(),
-    Container(color: Colors.black),
+    ReminderPage(),
   ];
 
   @override
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: homePageBgDarkPurpleClr,
+      // backgroundColor: homePageBgDarkPurpleClr,
       appBar: buildAppBar(),
       drawer: SideBar(),
       body: SizedBox.expand(
@@ -108,31 +109,31 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(Icons.home),
                   title: Text("Home"),
                   selectedColor: Colors.blue,
-                  unselectedColor: darkBlueClr,
+                  unselectedColor: buttondarkBlueClr,
                 ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.calendar_month),
                   title: Text("Calendar"),
                   selectedColor: Colors.blue,
-                  unselectedColor: darkBlueClr,
+                  unselectedColor: buttondarkBlueClr,
                 ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.add_circle),
                   title: Text("Add task"),
                   selectedColor: Colors.blue,
-                  unselectedColor: darkBlueClr,
+                  unselectedColor: buttondarkBlueClr,
                 ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.list_rounded),
                   title: Text("To-Do"),
                   selectedColor: Colors.blue,
-                  unselectedColor: darkBlueClr,
+                  unselectedColor: buttondarkBlueClr,
                 ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.alarm_rounded),
                   title: Text("Reminder"),
                   selectedColor: Colors.blue,
-                  unselectedColor: darkBlueClr,
+                  unselectedColor: buttondarkBlueClr,
                 ),
               ]
             : [
