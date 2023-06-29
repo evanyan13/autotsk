@@ -27,6 +27,7 @@ class _GreetingRowState extends State<GreetingRow> {
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
+    print(snap.data());
 
     setState(() {
       username = (snap.data()! as Map<String, dynamic>)['username'];

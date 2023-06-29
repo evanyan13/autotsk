@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:autotsk/util/text_input_field.dart';
 import 'package:autotsk/util/multi_line_text_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:autotsk/screen_type/addtask_page.dart';
+import 'package:autotsk/form_Sub/form_method.dart';
 
 class AddTask extends StatefulWidget {
   const AddTask({super.key});
@@ -21,10 +20,44 @@ class _AddTaskState extends State<AddTask> {
   final TextEditingController _locController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  late String uid;
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
+    userId();
+  }
+
+  void AddTasktoDb() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    String resp = await AddFormMethod().AddFormtoUserDb(
+      uid: await userId(),
+      title: _titleController.text,
+      date: _dateController.text,
+      priority: _priorController.text,
+      location: _locController.text,
+      notes: _notesController.text,
+    );
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  Future<String> userId() async {
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    setState(() {
+      uid = (snap.data()! as Map<String, dynamic>)['uid'];
+    });
+
+    return uid;
   }
 
   @override
@@ -350,7 +383,10 @@ class _AddTaskState extends State<AddTask> {
                   width: 335,
                   child: ElevatedButton(
                     onPressed: () {
-                      // print('hello');
+                      setState(() {
+                        AddTasktoDb();
+                        Navigator.of(context).pop(context);
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: crossbuttonColor,
@@ -361,14 +397,23 @@ class _AddTaskState extends State<AddTask> {
                         ),
                       ),
                     ),
-                    child: Text(
-                      'Add Task',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Neometric',
-                      ),
-                    ),
+                    child: _isLoading
+                        ? Container(
+                            height: 40,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: mainLightBgColour,
+                              ),
+                            ),
+                          )
+                        : Text(
+                            'Add Task',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Neometric',
+                            ),
+                          ),
                   ),
                 ),
               ],

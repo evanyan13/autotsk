@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     Body(),
     CalendarPage(),
     ToDoPage(),
-    Body(),
+    Container(color: Colors.black),
   ];
 
   @override
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             CalendarPage(),
             pageList[_previousIndex == 4 ? _previousIndex - 1 : _previousIndex],
             ToDoPage(),
-            Body(),
+            SizedBox.expand(),
           ],
         ),
       ),
