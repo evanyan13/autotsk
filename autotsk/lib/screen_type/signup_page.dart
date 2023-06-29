@@ -223,7 +223,7 @@ class _SignUpState extends State<SignUp> {
                           child: ElevatedButton(
                             onPressed: signUpUser,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: signButtonColour,
+                              backgroundColor: buttondarkPurpleClr,
                               padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
@@ -336,7 +336,7 @@ class _SignUpState extends State<SignUp> {
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: crossbuttonColor,
+                          backgroundColor: buttondarkBlueClr,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(50.0),

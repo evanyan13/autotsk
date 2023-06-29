@@ -16,7 +16,7 @@ class TextInputField extends StatelessWidget {
     required this.hintText,
     required this.textInputType,
     this.isPassW = false,
-    this.bgColor = whiteColour,
+    this.bgColor = Colors.white,
     required this.icon,
   }) : super(key: key);
 

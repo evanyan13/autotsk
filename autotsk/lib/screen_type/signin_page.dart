@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:autotsk/screen_type/addtask_page.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
@@ -180,7 +182,7 @@ class _SigninState extends State<Signin> {
                           child: ElevatedButton(
                             onPressed: LoginUser,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: signButtonColour,
+                              backgroundColor: buttondarkPurpleClr,
                               padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
@@ -338,7 +340,7 @@ class _SigninState extends State<Signin> {
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: crossbuttonColor,
+                          backgroundColor: buttondarkBlueClr,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(50.0),

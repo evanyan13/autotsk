@@ -5,13 +5,12 @@ import "package:autotsk/util/color.dart";
 import 'package:autotsk/screen_type/common_components/side_bar.dart';
 import 'package:autotsk/screen_type/common_components/nav_bar_dark.dart';
 
-class CalendarPage extends StatelessWidget {
-  const CalendarPage({super.key});
+class ReminderPage extends StatelessWidget {
+  const ReminderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mainLightBgColour,
       drawer: SideBar(),
       body: Center(
           child: Text(
@@ -20,7 +19,6 @@ class CalendarPage extends StatelessWidget {
           fontFamily: 'Neometric',
           fontWeight: FontWeight.bold,
           fontSize: 24,
-          color: homePageBgDarkPurpleClr,
         ),
       )),
     );

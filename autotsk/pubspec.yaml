@@ -40,6 +40,8 @@ dependencies:
   intl: ^0.18.1
   salomon_bottom_bar: ^3.3.2
   smooth_page_indicator: ^1.1.0
+  get_storage:
+  get:
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -73,7 +75,7 @@ fonts:
       - asset: package/autotsk/fonts/Neometric-ExtraBold.otf
       - asset: package/autotsk/fonts/Neometric-Bold.otf
         weight: 300
-        
+
   - family: MyFlutterApp
     fonts:
       - asset: package/fonts/MyFlutterApp.ttf
