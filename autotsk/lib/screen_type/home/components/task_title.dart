@@ -1,9 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 
-class TodayTitle extends StatelessWidget {
-  const TodayTitle({super.key});
+class TaskTitle extends StatelessWidget {
+  const TaskTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +31,11 @@ class TodayTitle extends StatelessWidget {
             child: Text(
               "View All",
               style: TextStyle(
-                fontFamily: 'Neometric',
-                fontWeight: FontWeight.normal,
-                fontSize: 16,
-              ),
+                      color: Colors.white,
+                      fontFamily: 'Neometric',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
             ),
           )
         ],

@@ -4,8 +4,8 @@ import 'package:autotsk/screen_type/home/components/meeting_event.dart';
 import 'package:autotsk/screen_type/home/components/meeting_title.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/screen_type/home/components/greetings_row.dart';
-import 'package:autotsk/screen_type/home/components/today_event.dart';
-import 'package:autotsk/screen_type/home/components/today_title.dart';
+import 'package:autotsk/screen_type/home/components/task.content.dart';
+import 'package:autotsk/screen_type/home/components/task_title.dart';
 import 'package:autotsk/util/color.dart';
 
 class Body extends StatelessWidget {
@@ -21,8 +21,8 @@ class Body extends StatelessWidget {
           GreetingRow(),
           Column(
             children: [
-              TodayTitle(),
-              TodayEvent(),
+              TaskTitle(),
+              TaskContent(),
             ],
           ),
           Column(

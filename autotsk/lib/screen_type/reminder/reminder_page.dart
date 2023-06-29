@@ -11,10 +11,11 @@ class ReminderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: mainLightBgColour,
       drawer: SideBar(),
       body: Center(
           child: Text(
-        "Calendar Page",
+        "Reminder Page",
         style: TextStyle(
           fontFamily: 'Neometric',
           fontWeight: FontWeight.bold,

@@ -5,14 +5,14 @@ import 'package:autotsk/util/color.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class TodayEvent extends StatefulWidget {
-  const TodayEvent({super.key});
+class TaskContent extends StatefulWidget {
+  const TaskContent({super.key});
 
   @override
-  State<TodayEvent> createState() => _TodayEventState();
+  State<TaskContent> createState() => _TaskContentState();
 }
 
-class _TodayEventState extends State<TodayEvent> {
+class _TaskContentState extends State<TaskContent> {
   int activeIndex = 1;
   final controller = CarouselController();
   final items = [
