@@ -2,6 +2,7 @@
 import 'package:autotsk/onboarding/ob1.dart';
 import 'package:autotsk/onboarding/ob2.dart';
 import 'package:autotsk/onboarding/ob3.dart';
+import 'package:autotsk/screen_type/home/home_test.dart';
 import 'package:autotsk/services/theme_service.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/util/themes.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       routes: {
         '/ob1': (context) => OnboardingFirst(),
         '/ob2': (context) => OnboardingSecond(),
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.active) {
             // User has been authenticated, proceed to sign in to Home Page
             if (snapshot.hasData) {
-              return const HomePage();
+              return HomePage();
             } else if (snapshot.hasError) {
               return Center(child: Text('${snapshot.error}'));
             }

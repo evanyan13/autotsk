@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -65,11 +65,23 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Body(),
             CalendarPage(),
-            pageList[_previousIndex == 4 ? _previousIndex - 1 : _previousIndex],
             ToDoPage(),
             SizedBox.expand(),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 40,
+        ),
+        backgroundColor: buttonLightBlueClr,
+        onPressed: () =>  Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => AddTask()),
+                ),
+              ),
       ),
       bottomNavigationBar: SalomonBottomBar(
         backgroundColor: isLight ? mainLightBgColour : homePageBgDarkPurpleClr,
@@ -78,29 +90,31 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             _previousIndex = _currentIndex;
             _currentIndex = index;
-            if (_currentIndex == 1 || _currentIndex == 3) {
+            if (_currentIndex == 1 || _currentIndex == 2) {
               isLight = true;
-            } else if (_currentIndex == 0 || _currentIndex == 4) {
+            } else if (_currentIndex == 0 || _currentIndex == 3) {
               isLight = false;
-            } else if (_currentIndex == 2) {
-              if (_previousIndex == 1 || _previousIndex == 3) {
-                isLight = true;
-              } else if (_previousIndex == 2 || _previousIndex == 4) {
-                isLight = false;
-              }
             }
+            // } else if (_currentIndex == 2) {
+            //   if (_previousIndex == 1 || _previousIndex == 3) {
+            //     isLight = true;
+            //   } else if (_previousIndex == 2 || _previousIndex == 4) {
+            //     isLight = false;
+            //   }
+            // }
 
-            if (_currentIndex == 2) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: ((context) => AddTask()),
-                ),
-              );
+            // if (_currentIndex == 2) {
+            //   Navigator.of(context).push(
+            //     MaterialPageRoute(
+            //       builder: ((context) => AddTask()),
+            //     ),
+            //   );
 
-              _pageController.jumpToPage(_previousIndex);
-            } else {
-              _pageController.jumpToPage(_currentIndex);
-            }
+            //   _pageController.jumpToPage(_previousIndex);
+            // } else {
+            //   _pageController.jumpToPage(_currentIndex);
+            // }
+            _pageController.jumpToPage(_currentIndex);
           });
         },
         items: isLight
@@ -117,12 +131,12 @@ class _HomePageState extends State<HomePage> {
                   selectedColor: Colors.blue,
                   unselectedColor: buttondarkBlueClr,
                 ),
-                SalomonBottomBarItem(
-                  icon: Icon(Icons.add_circle),
-                  title: Text("Add task"),
-                  selectedColor: Colors.blue,
-                  unselectedColor: buttondarkBlueClr,
-                ),
+                // SalomonBottomBarItem(
+                //   icon: Icon(Icons.add_circle),
+                //   title: Text("Add task"),
+                //   selectedColor: Colors.blue,
+                //   unselectedColor: buttondarkBlueClr,
+                // ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.list_rounded),
                   title: Text("To-Do"),
@@ -149,12 +163,12 @@ class _HomePageState extends State<HomePage> {
                   selectedColor: Colors.lightBlue,
                   unselectedColor: Colors.white,
                 ),
-                SalomonBottomBarItem(
-                  icon: Icon(Icons.add_circle),
-                  title: Text("Add task"),
-                  selectedColor: Colors.lightBlue,
-                  unselectedColor: Colors.white,
-                ),
+                // SalomonBottomBarItem(
+                //   icon: Icon(Icons.add_circle),
+                //   title: Text("Add task"),
+                //   selectedColor: Colors.lightBlue,
+                //   unselectedColor: Colors.white,
+                // ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.list_rounded),
                   title: Text("To-Do"),
