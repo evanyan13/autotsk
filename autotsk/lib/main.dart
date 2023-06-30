@@ -4,6 +4,7 @@ import 'package:autotsk/onboarding/ob2.dart';
 import 'package:autotsk/onboarding/ob3.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:autotsk/screen_type/signin_page.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
 import 'package:autotsk/screen_type/addtask_page.dart';
@@ -16,12 +17,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   // await GetStorage.init();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   // no need to config for web version  of  the app.
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  
 
   // This widget is the root of your application.
   @override
