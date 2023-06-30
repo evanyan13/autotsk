@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -25,23 +27,26 @@ class TextInputField extends StatelessWidget {
     final inputBorder = OutlineInputBorder(
       borderSide: Divider.createBorderSide(context),
       borderRadius: BorderRadius.all(
-        Radius.circular(15.0),
+        Radius.circular(16.0),
       ),
     );
-    return TextField(
-      controller: textEditingController,
-      decoration: InputDecoration(
-        hintText: hintText,
-        border: inputBorder,
-        focusedBorder: inputBorder,
-        enabledBorder: inputBorder,
-        filled: true,
-        contentPadding: const EdgeInsets.all(8.0),
-        fillColor: bgColor,
-        prefixIcon: icon,
+    return Container(
+      margin: EdgeInsets.only(top:4.0),
+      child: TextField(
+        controller: textEditingController,
+        decoration: InputDecoration(
+          hintText: hintText,
+          border: inputBorder,
+          focusedBorder: inputBorder,
+          enabledBorder: inputBorder,
+          filled: true,
+          contentPadding: const EdgeInsets.all(8.0),
+          fillColor: bgColor,
+          prefixIcon: icon,
+        ),
+        keyboardType: textInputType,
+        obscureText: isPassW,
       ),
-      keyboardType: textInputType,
-      obscureText: isPassW,
     );
   }
 }
