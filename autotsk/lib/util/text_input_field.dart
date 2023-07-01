@@ -2,6 +2,7 @@
 
 import 'dart:ui';
 
+import 'package:autotsk/screen_type/addtask_page.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 
@@ -11,7 +12,8 @@ class TextInputField extends StatelessWidget {
   final String hintText;
   final TextInputType textInputType;
   final Color bgColor;
-  final Icon icon;
+  final Icon? icon;
+  final Widget? widget;
   const TextInputField({
     Key? key,
     required this.textEditingController,
@@ -19,7 +21,8 @@ class TextInputField extends StatelessWidget {
     required this.textInputType,
     this.isPassW = false,
     this.bgColor = Colors.white,
-    required this.icon,
+    this.icon,
+    this.widget,
   }) : super(key: key);
 
   @override
@@ -31,21 +34,31 @@ class TextInputField extends StatelessWidget {
       ),
     );
     return Container(
-      margin: EdgeInsets.only(top:4.0),
-      child: TextField(
-        controller: textEditingController,
-        decoration: InputDecoration(
-          hintText: hintText,
-          border: inputBorder,
-          focusedBorder: inputBorder,
-          enabledBorder: inputBorder,
-          filled: true,
-          contentPadding: const EdgeInsets.all(8.0),
-          fillColor: bgColor,
-          prefixIcon: icon,
-        ),
-        keyboardType: textInputType,
-        obscureText: isPassW,
+      height: 52,
+      margin: EdgeInsets.only(top: 8.0),
+      child: Row(
+        children: [
+          SizedBox(height: 4.0),
+          Expanded(
+            child: TextField(
+              readOnly: widget == null ? false : true,
+              controller: textEditingController,
+              decoration: InputDecoration(
+                hintText: hintText,
+                border: inputBorder,
+                focusedBorder: inputBorder,
+                enabledBorder: inputBorder,
+                filled: true,
+                contentPadding: const EdgeInsets.all(8.0),
+                fillColor: bgColor,
+                prefixIcon: icon,
+              ),
+              keyboardType: textInputType,
+              obscureText: isPassW,
+            ),
+          ),
+          widget == null ? Container() : Container(child: widget),
+        ],
       ),
     );
   }
