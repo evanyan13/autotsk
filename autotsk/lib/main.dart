@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:autotsk/screen_type/signin_page.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
-import 'package:autotsk/screen_type/addtask_page.dart';
+import 'package:autotsk/add_task/addtask_page.dart';
 import 'package:autotsk/onboarding/pageview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';

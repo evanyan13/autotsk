@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:autotsk/screen_type/addtask_page.dart';
+import 'package:autotsk/add_task/addtask_page.dart';
 import 'package:autotsk/screen_type/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';

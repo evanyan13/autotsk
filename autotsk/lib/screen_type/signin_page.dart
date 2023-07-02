@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:autotsk/screen_type/addtask_page.dart';
+import 'package:autotsk/add_task/addtask_page.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/util/text_input_field.dart';

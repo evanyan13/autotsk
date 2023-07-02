@@ -12,7 +12,7 @@ import 'package:autotsk/main.dart';
 import 'package:autotsk/screen_type/calendar/calendar_page.dart';
 import 'package:autotsk/screen_type/to_do/to_do_page.dart';
 import 'package:autotsk/screen_type/reminder/reminder_page.dart';
-import 'package:autotsk/screen_type/addtask_page.dart';
+import 'package:autotsk/add_task/addtask_page.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
