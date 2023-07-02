@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
 import 'package:autotsk/screen_type/signin_page.dart';
-import 'package:autotsk/screen_type/addtask_page.dart';
+import 'package:autotsk/add_task/addtask_page.dart';
 import 'package:autotsk/onboarding/ob1.dart';
 import 'package:autotsk/onboarding/ob2.dart';
 import 'package:autotsk/onboarding/ob3.dart';

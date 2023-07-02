@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:autotsk/screen_type/addtask_page.dart';
+import 'package:autotsk/add_task/addtask_page.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 
@@ -33,11 +33,10 @@ class TextInputField extends StatelessWidget {
     );
     return Container(
       height: 52,
-      margin: EdgeInsets.only(top: 8.0),
+      margin: EdgeInsets.only(top: 4.0),
       child: Row(
         children: [
-          SizedBox(height: 4.0),
-          Flexible(
+          Expanded(
             child: TextField(
               readOnly: widget == null ? false : true,
               controller: textEditingController,

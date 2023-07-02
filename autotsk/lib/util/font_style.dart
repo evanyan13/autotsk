@@ -11,7 +11,7 @@ TextStyle get headerStyle {
 
 TextStyle get subHeaderStyle {
   return TextStyle(
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: "Neometric",
     fontWeight: FontWeight.bold,
     letterSpacing: 1.5,
