@@ -7,8 +7,10 @@ import 'package:autotsk/util/multi_line_text_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:autotsk/form_Sub/form_method.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:autotsk/util/font_style.dart';
+import 'package:quickalert/quickalert.dart';
 
 class AddTask extends StatefulWidget {
   const AddTask({super.key});
@@ -27,6 +29,12 @@ class _AddTaskState extends State<AddTask> {
   late String uid;
   DateTime _selectedDate = DateTime.now();
   bool _isLoading = false;
+  String _selectedLevel = "Low";
+  List<String> priorityList = [
+    "High",
+    "Medium",
+    "Low",
+  ];
 
   @override
   void initState() {
@@ -111,96 +119,133 @@ class _AddTaskState extends State<AddTask> {
                   style: subHeaderStyle,
                 ),
               ),
-              SizedBox(height: 4),
               SizedBox(
                 width: 330,
                 child: TextInputField(
                   textEditingController: _titleController,
                   hintText: 'Add a title',
                   textInputType: TextInputType.text,
-                  // icon: Icon(Icons.title),
+                  icon: Icon(Icons.title),
                 ),
               ),
-              SizedBox(height: 16),
-              Container(
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          width: 165,
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Date',
-                            style: subHeaderStyle,
-                          ),
+              SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Column(
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        width: 165,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Date',
+                          style: subHeaderStyle,
                         ),
-                        SizedBox(height: 3),
-                        Container(
-                          child: Row(
-                            children: <Widget>[
-                              SizedBox(
-                                width: 165,
-                                child: TextInputField(
-                                  textEditingController: _dateController,
-                                  hintText: DateFormat("yMd")
-                                      .format(_selectedDate),
-                                  textInputType: TextInputType.text,
-                                  widget: IconButton(
-                                    icon: Icon(Icons.calendar_month_rounded),
-                                    iconSize: 24,
-                                    onPressed: () {
-                                      print("Tapped");
-                                      _getDateFromUser();
-                                    },
+                      ),
+                      Container(
+                        child: Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 165,
+                              child: TextInputField(
+                                textEditingController: _dateController,
+                                hintText:
+                                    DateFormat("yMd").format(_selectedDate),
+                                textInputType: TextInputType.text,
+                                widget: IconButton(
+                                  icon: Icon(Icons.calendar_month_rounded),
+                                  color: buttondarkBlueClr,
+                                  iconSize: 24,
+                                  onPressed: () {
+                                    print("Tapped");
+                                    _getDateFromUser();
+                                    // _getTimeFromUser(isStartTime: true);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 165,
+                        // alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Priority',
+                          style: subHeaderStyle,
+                        ),
+                      ),
+                      // SizedBox(height: 3),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 165,
+                              child: TextInputField(
+                                textEditingController: _priorController,
+                                hintText: _selectedLevel,
+                                textInputType: TextInputType.text,
+                                // widget: IconButton(
+                                //   icon: Icon(
+                                //     Icons.keyboard_arrow_down,
+                                //   ),
+                                //   color: buttondarkBlueClr,
+                                //   iconSize: 32,
+                                //   onPressed: () {
+                                //     print("Tapped");
+                                //   },
+                                // ), // icon: Icon(Icons.low_priority_sharp),
+                                widget: DropdownButton(
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: buttondarkBlueClr,
                                   ),
+                                  iconSize: 24,
+                                  // elevation: 4,
+                                  underline: Container(height: 0),
+                                  style: subHeaderStyle,
+                                  items: priorityList
+                                      .map<DropdownMenuItem<String>>(
+                                    (String? level) {
+                                      return DropdownMenuItem<String>(
+                                        value: level,
+                                        child: Text(level!,
+                                            style: TextStyle(
+                                                color: buttondarkBlueClr,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold)),
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (String? newLevel) {
+                                    setState(() {
+                                      _selectedLevel = newLevel!;
+                                    });
+                                  },
+                                  // priorityList.map<DropdownMenuItem<String>>
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    Column(
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          width: 110,
-                          // alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Priority',
-                            style: subHeaderStyle,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Container(
-                          child: Row(
-                            children: <Widget>[
-                              SizedBox(width: 45),
-                              SizedBox(
-                                width: 120,
-                                child: TextInputField(
-                                  textEditingController: _priorController,
-                                  hintText: 'Priority',
-                                  textInputType: TextInputType.text,
-                                  // icon: Icon(Icons.low_priority_sharp),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 16),
+                  SizedBox(height: 12),
                   Container(
                     width: 330,
                     alignment: Alignment.centerLeft,
@@ -287,14 +332,13 @@ class _AddTaskState extends State<AddTask> {
                   style: subHeaderStyle,
                 ),
               ),
-              SizedBox(height: 4),
               Container(
                 width: 325,
                 child: TextInputField(
                   textEditingController: _locController,
                   hintText: 'Enter address',
                   textInputType: TextInputType.text,
-                  // icon: Icon(Icons.location_on),
+                  icon: Icon(Icons.location_on),
                 ),
               ),
               SizedBox(height: 16),
@@ -302,12 +346,7 @@ class _AddTaskState extends State<AddTask> {
                 width: 325,
                 child: Text(
                   "Notes",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: "Neometric",
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.5,
-                  ),
+                  style: subHeaderStyle,
                 ),
               ),
               SizedBox(height: 4),
@@ -326,14 +365,18 @@ class _AddTaskState extends State<AddTask> {
                 width: 335,
                 child: ElevatedButton(
                   onPressed: () {
-                    setState(() {
+                    if (_validateDate() == true) {
                       AddTasktoDb();
-                      Navigator.of(context).pop(context);
-                    });
+                    }
+                    // setState(() {
+                    //   _validateDate();
+                    //   // AddTasktoDb();
+                    //   // Navigator.of(context).pop(context);
+                    // });
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: buttondarkBlueClr,
-                    padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                    // padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(15.0),
@@ -377,4 +420,47 @@ class _AddTaskState extends State<AddTask> {
       print("No Date Selected");
     }
   }
+
+  _validateDate() {
+    bool funcState = false;
+    if (_titleController.text.isNotEmpty) {
+      Navigator.of(context).pop(context);
+      funcState = true;
+    } else if (_titleController.text.isEmpty) {
+      return QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        text: "All Fields are required",
+      );
+    }
+    return funcState;
+  }
 }
+
+  // To try implement again in the future regarding select time from user
+  // _getTimeFromUser() async {
+  //   var pickedTime = await _showTimePicker();
+  //   String _formatedTime = pickedTime.format(context);
+  //   if (pickedTime == null) {
+  //     print("Time not selected");
+  //   } else if (isStartTime == true) {
+  //     setState(() {
+  //       _startTime = _formatedTime;
+  //     });
+  //   } else if (isStartTime == false) {
+  //     setState(() {
+  //       _endTime = _formatedTime;
+  //     });
+  //   }
+  // }
+
+  // _showTimePicker() {
+  //   return showTimePicker(
+  //       context: context,
+  //       initialEntryMode: TimePickerEntryMode.input,
+  //       initialTime: TimeOfDay(
+  //         hour: int.parse(_startTime.spilt(":")[0]),
+  //         minute: int.parse(_startTime.spilt(":")[1].spilt(" ")[0]),
+  //       ));
+  // }
+
