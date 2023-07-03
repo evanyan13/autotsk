@@ -26,6 +26,7 @@ class _CalendarPageState extends State<CalendarPage> {
             buildMonthBar(),
             // Date Picker Slider
             buildDateBar()
+            // _showTasks(),
           ],
         ));
   }
@@ -53,7 +54,6 @@ class _CalendarPageState extends State<CalendarPage> {
   }
 
   Container buildDateBar() {
-
     return Container(
       margin: EdgeInsets.only(top: 16, left: 16),
       child: DatePicker(
@@ -75,8 +75,8 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  Padding buildMonthBar() {
-    return Padding(
+  Container buildMonthBar() {
+    return Container(
             padding: const EdgeInsets.only(top: 8.0),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -142,4 +142,10 @@ class _CalendarPageState extends State<CalendarPage> {
             ),
           );
   }
+
+  // _showTasks() {
+  //   return Expanded(
+  //     child: ,
+  //   )
+  // }
 }
