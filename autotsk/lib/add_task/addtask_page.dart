@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:autotsk/add_task/task_model.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/text_input_field.dart';
@@ -31,7 +32,9 @@ class _AddTaskState extends State<AddTask> {
   late String uid;
   DateTime _selectedDate = DateTime.now();
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
-  String _endTime = DateFormat("hh:mm a").format(DateTime.now().add(Duration(hours: 1))).toString();
+  String _endTime = DateFormat("hh:mm a")
+      .format(DateTime.now().add(Duration(hours: 1)))
+      .toString();
   bool _isLoading = false;
   String _selectedLevel = "Low";
   List<String> priorityList = [
@@ -46,21 +49,23 @@ class _AddTaskState extends State<AddTask> {
     userId();
   }
 
-  void AddTasktoDb() async {
+  void addTasktoDb() async {
     setState(() {
       _isLoading = true;
     });
 
-    String resp = await AddFormMethod().AddFormtoUserDb(
+    final task = TaskModel(
       uid: await userId(),
       title: _titleController.text,
-      date: _dateController.text,
-      startTime: _timeController.text,
-      endTime: _timeController.text,
-      priority: _priorController.text,
+      date: DateFormat.yMd().format(_selectedDate),
+      startTime: _startTime,
+      endTime: _endTime,
+      priority: _selectedLevel,
       location: _locController.text,
       notes: _notesController.text,
     );
+
+    String resp = await AddFormMethod().addFormtoUserDb(task);
 
     setState(() {
       _isLoading = false;
@@ -468,7 +473,7 @@ class _AddTaskState extends State<AddTask> {
           child: ElevatedButton(
             onPressed: () {
               if (_validateDate() == true) {
-                AddTasktoDb();
+                addTasktoDb();
               }
               // setState(() {
               //   _validateDate();
