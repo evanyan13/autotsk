@@ -29,6 +29,13 @@
             {
               "client_id": "850984528124-m7nab4o1srnsqjo9enmud9scsk7n3odm.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "850984528124-6nq1trju6t3cv9scnut4mrqoreekfpj9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.autotsk"
+              }
             }
           ]
         }
