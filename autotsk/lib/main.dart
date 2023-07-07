@@ -9,6 +9,7 @@ import 'package:autotsk/screen_type/signin_page.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
 import 'package:autotsk/add_task/addtask_page.dart';
 import 'package:autotsk/onboarding/pageview.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:autotsk/screen_type/home/home_page.dart';
@@ -19,7 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   // no need to config for web version  of  the app.
   runApp(const MyApp());
 }
