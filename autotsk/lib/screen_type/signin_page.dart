@@ -338,7 +338,9 @@ class _SigninState extends State<Signin> {
                       width: 50,
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pop(context);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: buttondarkBlueClr,
                           shape: RoundedRectangleBorder(

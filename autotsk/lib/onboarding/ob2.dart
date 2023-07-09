@@ -1,11 +1,8 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:autotsk/buttons/sign_in_button.dart';
-import 'package:autotsk/animation/custom_rect_tween.dart';
 import 'package:autotsk/routing/hero_dialog_route.dart';
 import 'package:autotsk/screen_type/signin_page.dart';
+import 'package:autotsk/util/ListOfQuotes.dart';
 
 class OnboardingSecond extends StatefulWidget {
   const OnboardingSecond({super.key});
@@ -15,6 +12,10 @@ class OnboardingSecond extends StatefulWidget {
 }
 
 class _OnboardingSecondState extends State<OnboardingSecond> {
+  Widget UIquoteDisplay() {
+    return ListOfQuotes().quoteDisplay();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,21 +80,20 @@ class _OnboardingSecondState extends State<OnboardingSecond> {
                 Container(
                   width: 300,
                   height: 150,
-                  child: Text(
-                    'short description of onboarding process',
-                    style: TextStyle(
-                      fontFamily: 'Neometric',
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  child: UIquoteDisplay(),
                   decoration: BoxDecoration(
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 10,
+                      ),
+                    ],
                     borderRadius: BorderRadius.all(
                       Radius.circular(20.0),
                     ),
-                    color: Colors.grey,
+                    color: mainLightBgColour,
                   ),
-                  padding: EdgeInsets.fromLTRB(20.0, 15.0, 10.0, 10.0),
+                  padding: EdgeInsets.fromLTRB(25.0, 20.0, 15.0, 10.0),
                 ),
 
                 Positioned(

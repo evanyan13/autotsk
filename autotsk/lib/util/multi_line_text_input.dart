@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:autotsk/util/color.dart';
 
 class MultiLineText extends StatelessWidget {
   final TextEditingController textEditingController;

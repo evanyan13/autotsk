@@ -2,7 +2,6 @@
 
 import 'package:autotsk/add_task/addtask_page.dart';
 import 'package:flutter/material.dart';
-import 'package:autotsk/util/color.dart';
 
 class TextInputField extends StatelessWidget {
   final TextEditingController textEditingController;
