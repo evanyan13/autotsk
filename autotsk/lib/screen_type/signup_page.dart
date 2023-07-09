@@ -296,7 +296,7 @@ class _SignUpState extends State<SignUp> {
                           'Sign Up with Google or Apple',
                           style: TextStyle(
                             fontSize: 15,
-                            fontFamily: "Neometric",                        
+                            fontFamily: "Neometric",
                           ),
                         ),
 
@@ -334,7 +334,9 @@ class _SignUpState extends State<SignUp> {
                       width: 50,
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pop(context);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: buttondarkBlueClr,
                           shape: RoundedRectangleBorder(

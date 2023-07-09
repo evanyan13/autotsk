@@ -4,7 +4,6 @@ import 'package:autotsk/onboarding/ob2.dart';
 import 'package:autotsk/onboarding/ob3.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:autotsk/screen_type/signin_page.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
 import 'package:autotsk/add_task/addtask_page.dart';
@@ -27,7 +26,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
 
   // This widget is the root of your application.
   @override
@@ -49,7 +47,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.active) {
             // User has been authenticated, proceed to sign in to Home Page
             if (snapshot.hasData) {
-              return HomePage();
+              return PageV();
             } else if (snapshot.hasError) {
               return Center(child: Text('${snapshot.error}'));
             }
