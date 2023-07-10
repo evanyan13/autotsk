@@ -8,7 +8,6 @@ import 'package:autotsk/screen_type/signin_page.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
 import 'package:autotsk/add_task/addtask_page.dart';
 import 'package:autotsk/onboarding/pageview.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:autotsk/screen_type/home/home_page.dart';
@@ -46,7 +45,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.active) {
             // User has been authenticated, proceed to sign in to Home Page
             if (snapshot.hasData) {
-              return PageV();
+              return HomePage();
             } else if (snapshot.hasError) {
               return Center(child: Text('${snapshot.error}'));
             }
@@ -60,7 +59,7 @@ class MyApp extends StatelessWidget {
           }
 
           // Default shows Onboarding Page
-          return const OnboardingFirst();
+          return const PageV();
         },
       ),
       theme: ThemeData(

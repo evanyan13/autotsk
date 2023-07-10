@@ -1,8 +1,4 @@
 import 'package:autotsk/add_task/task_model.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -37,10 +33,9 @@ class AddFormMethod extends GetxController {
   }
 
   Future<List<TaskModel>> getAllTasks(String id) async {
-    final snapshot = await _firestore
-        .collection('tasks')
-        .get();
-    final taskData = snapshot.docs.map((e) => TaskModel.fromSnapshot(e)).toList();
+    final snapshot = await _firestore.collection('tasks').get();
+    final taskData =
+        snapshot.docs.map((e) => TaskModel.fromSnapshot(e)).toList();
     return taskData;
   }
 }

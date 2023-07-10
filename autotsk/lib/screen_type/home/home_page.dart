@@ -1,14 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/screen_type/home/components/body.dart';
 import 'package:autotsk/screen_type/common_components/side_bar.dart';
-import 'package:autotsk/screen_type/common_components/nav_bar.dart';
-import 'package:autotsk/main.dart';
 import 'package:autotsk/screen_type/calendar/calendar_page.dart';
 import 'package:autotsk/screen_type/to_do/to_do_page.dart';
 import 'package:autotsk/screen_type/reminder/reminder_page.dart';
@@ -78,84 +72,87 @@ class _HomePageState extends State<HomePage> {
         ),
         backgroundColor: buttonLightBlueClr,
         hoverColor: buttondarkBlueClr,
-        onPressed: () =>  Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: ((context) => AddTask()),
-                ),
-              ),
+        onPressed: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: ((context) => AddTask()),
+          ),
+        ),
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(bottom: 8.0),
         color: isLight ? mainLightBgColour : homePageBgDarkPurpleClr,
         child: SalomonBottomBar(
-            backgroundColor: isLight ? mainLightBgColour : homePageBgDarkPurpleClr,
-            currentIndex: _currentIndex,
-            onTap: (index) {
-              setState(() {
-                _previousIndex = _currentIndex;
-                _currentIndex = index;
-                if (_currentIndex == 1 || _currentIndex == 2 || _currentIndex == 3) {
-                  isLight = true;
-                } else if (_currentIndex == 0) {
-                  isLight = false;
-                }
-                _pageController.jumpToPage(_currentIndex);
-              });
-            },
-            items: isLight
-                ? [
-                    SalomonBottomBarItem(
-                      icon: Icon(Icons.home),
-                      title: Text("Home"),
-                      selectedColor: Colors.blue,
-                      unselectedColor: buttondarkBlueClr,
-                    ),
-                    SalomonBottomBarItem(
-                      icon: Icon(Icons.calendar_month),
-                      title: Text("Calendar"),
-                      selectedColor: Colors.blue,
-                      unselectedColor: buttondarkBlueClr,
-                    ),
-                    SalomonBottomBarItem(
-                      icon: Icon(Icons.list_rounded),
-                      title: Text("To-Do"),
-                      selectedColor: Colors.blue,
-                      unselectedColor: buttondarkBlueClr,
-                    ),
-                    SalomonBottomBarItem(
-                      icon: Icon(Icons.alarm_rounded),
-                      title: Text("Reminder"),
-                      selectedColor: Colors.blue,
-                      unselectedColor: buttondarkBlueClr,
-                    ),
-                  ]
-                : [
-                    SalomonBottomBarItem(
-                      icon: Icon(Icons.home),
-                      title: Text("Home"),
-                      selectedColor: Colors.lightBlue,
-                      unselectedColor: Colors.white,
-                    ),
-                    SalomonBottomBarItem(
-                      icon: Icon(Icons.calendar_month),
-                      title: Text("Calendar"),
-                      selectedColor: Colors.lightBlue,
-                      unselectedColor: Colors.white,
-                    ),
-                    SalomonBottomBarItem(
-                      icon: Icon(Icons.list_rounded),
-                      title: Text("To-Do"),
-                      selectedColor: Colors.lightBlue,
-                      unselectedColor: Colors.white,
-                    ),
-                    SalomonBottomBarItem(
-                      icon: Icon(Icons.alarm_rounded),
-                      title: Text("Reminder"),
-                      selectedColor: Colors.lightBlue,
-                      unselectedColor: Colors.white,
-                    ),
-                  ],
-          ),
+          backgroundColor:
+              isLight ? mainLightBgColour : homePageBgDarkPurpleClr,
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _previousIndex = _currentIndex;
+              _currentIndex = index;
+              if (_currentIndex == 1 ||
+                  _currentIndex == 2 ||
+                  _currentIndex == 3) {
+                isLight = true;
+              } else if (_currentIndex == 0) {
+                isLight = false;
+              }
+              _pageController.jumpToPage(_currentIndex);
+            });
+          },
+          items: isLight
+              ? [
+                  SalomonBottomBarItem(
+                    icon: Icon(Icons.home),
+                    title: Text("Home"),
+                    selectedColor: Colors.blue,
+                    unselectedColor: buttondarkBlueClr,
+                  ),
+                  SalomonBottomBarItem(
+                    icon: Icon(Icons.calendar_month),
+                    title: Text("Calendar"),
+                    selectedColor: Colors.blue,
+                    unselectedColor: buttondarkBlueClr,
+                  ),
+                  SalomonBottomBarItem(
+                    icon: Icon(Icons.list_rounded),
+                    title: Text("To-Do"),
+                    selectedColor: Colors.blue,
+                    unselectedColor: buttondarkBlueClr,
+                  ),
+                  SalomonBottomBarItem(
+                    icon: Icon(Icons.alarm_rounded),
+                    title: Text("Reminder"),
+                    selectedColor: Colors.blue,
+                    unselectedColor: buttondarkBlueClr,
+                  ),
+                ]
+              : [
+                  SalomonBottomBarItem(
+                    icon: Icon(Icons.home),
+                    title: Text("Home"),
+                    selectedColor: Colors.lightBlue,
+                    unselectedColor: Colors.white,
+                  ),
+                  SalomonBottomBarItem(
+                    icon: Icon(Icons.calendar_month),
+                    title: Text("Calendar"),
+                    selectedColor: Colors.lightBlue,
+                    unselectedColor: Colors.white,
+                  ),
+                  SalomonBottomBarItem(
+                    icon: Icon(Icons.list_rounded),
+                    title: Text("To-Do"),
+                    selectedColor: Colors.lightBlue,
+                    unselectedColor: Colors.white,
+                  ),
+                  SalomonBottomBarItem(
+                    icon: Icon(Icons.alarm_rounded),
+                    title: Text("Reminder"),
+                    selectedColor: Colors.lightBlue,
+                    unselectedColor: Colors.white,
+                  ),
+                ],
+        ),
       ),
     );
   }
