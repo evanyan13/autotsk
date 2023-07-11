@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
       drawer: SideBar(),
       body: SizedBox.expand(
         child: PageView(
+          physics: NeverScrollableScrollPhysics(),
           controller: _pageController,
           onPageChanged: (index) {
             setState(
