@@ -17,15 +17,16 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   DateTime _selectedDate = DateTime.now();
   late DateTime _currentDate = _selectedDate;
-  late int _numMonth = _selectedDate.month;
 
+  late int _numMonth = _selectedDate.month;
   late int _currentMonth = _numMonth;
-  late int _currentday = _selectedDate.day;
 
   late String _selectedMonth = getMonth(_selectedDate.month);
   String getMonth(int currentMonthIndex) {
     return DateFormat('MMM').format(DateTime(0, currentMonthIndex)).toString();
   }
+
+  late int _currentday = _selectedDate.day;
 
   @override
   Widget build(BuildContext context) {
