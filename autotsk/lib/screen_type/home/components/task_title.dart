@@ -31,11 +31,11 @@ class TaskTitle extends StatelessWidget {
             child: Text(
               "View All",
               style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Neometric',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                color: Colors.white,
+                fontFamily: 'Neometric',
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
             ),
           )
         ],

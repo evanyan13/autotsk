@@ -15,18 +15,19 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
+  // to set the current date to reference from
   DateTime _selectedDate = DateTime.now();
+  late int _numMonth = _currentDate.month;
+
+  // to use to get correct reference
   late DateTime _currentDate = _selectedDate;
-
-  late int _numMonth = _selectedDate.month;
   late int _currentMonth = _numMonth;
+  late int _currentday = _currentDate.day;
+  late String _selectedMonth = getMonth(_currentDate.month);
 
-  late String _selectedMonth = getMonth(_selectedDate.month);
   String getMonth(int currentMonthIndex) {
     return DateFormat('MMM').format(DateTime(0, currentMonthIndex)).toString();
   }
-
-  late int _currentday = _selectedDate.day;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,9 @@ class _CalendarPageState extends State<CalendarPage> {
             buildMonthBar(),
             // Date Picker Slider
             buildDateBar(),
-            // _showTasks(),
+            // showTasks(), returns a Container widget that displays the task
+            SizedBox(height: 10),
+            showTasks(),
           ],
         ));
   }
@@ -117,7 +120,7 @@ class _CalendarPageState extends State<CalendarPage> {
                     });
                   },
                   child: Text(
-                    "Previous",
+                    "${getMonth(_currentDate.month - 1)}",
                     style: TextStyle(
                       color: buttondarkBlueClr,
                       fontFamily: 'Neometric',
@@ -158,7 +161,7 @@ class _CalendarPageState extends State<CalendarPage> {
                       backgroundColor: Colors.white,
                       itemExtent: 30,
                       scrollController: FixedExtentScrollController(
-                        initialItem: 5,
+                        initialItem: _currentMonth - 1,
                       ),
                       children: [
                         Text('January'),
@@ -177,8 +180,8 @@ class _CalendarPageState extends State<CalendarPage> {
                       onSelectedItemChanged: (int currentMonth) {
                         setState(() {
                           _currentMonth = currentMonth + 1;
-                          _selectedDate = DateTime(
-                            _selectedDate.year,
+                          _currentDate = DateTime(
+                            _currentDate.year,
                             _currentMonth,
                           );
                           _selectedMonth = getMonth(_currentMonth);
@@ -189,36 +192,32 @@ class _CalendarPageState extends State<CalendarPage> {
                 );
               },
             ),
-            Row(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      _currentMonth = _currentMonth + 1;
-                      _currentDate = DateTime(
-                        DateTime.now().year,
-                        _currentMonth,
-                        _currentday,
-                      );
-                      _selectedMonth = getMonth(_currentMonth);
-                    });
-                  },
-                  child: Text(
-                    "Next",
-                    style: TextStyle(
-                      color: buttondarkBlueClr,
-                      fontFamily: 'Neometric',
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _currentMonth = _currentMonth + 1;
+                  _currentDate = DateTime(
+                    DateTime.now().year,
+                    _currentMonth,
+                    _currentday,
+                  );
+                  _selectedMonth = getMonth(_currentMonth);
+                });
+              },
+              child: Text(
+                "${getMonth(_currentDate.month + 1)}",
+                style: TextStyle(
                   color: buttondarkBlueClr,
-                  size: 16,
+                  fontFamily: 'Neometric',
+                  fontWeight: FontWeight.normal,
+                  fontSize: 14,
                 ),
-              ],
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: buttondarkBlueClr,
+              size: 16,
             ),
           ],
         ),
@@ -226,9 +225,38 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  // _showTasks() {
-  //   return Expanded(
-  //     child: ,
-  //   )
-  // }
+  Widget showTasks() {
+    return Expanded(
+      child: Container(
+        color: homePageBgDarkPurpleClr,
+        child: Column(
+          children: [
+            Align(
+              widthFactor: 0.5,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 25),
+                  Text(
+                    "Today's",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      letterSpacing: 1.0,
+                      fontFamily: 'Neometric',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 5),
+            Container(
+              width: 345,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

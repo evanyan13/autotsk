@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
+import 'package:autotsk/screen_type/home/components/task.content.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/screen_type/home/components/body.dart';
@@ -30,8 +31,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    setUp();
     super.initState();
     _pageController = PageController();
+  }
+
+  void setUp() {
+    TaskContent();
   }
 
   @override

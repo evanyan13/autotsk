@@ -1,11 +1,39 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/screen_type/calendar/calendar_page.dart';
 import 'package:autotsk/screen_type/to_do/to_do_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class SideBar extends StatelessWidget {
+class SideBar extends StatefulWidget {
   const SideBar({super.key});
+
+  @override
+  State<SideBar> createState() => _SideBarState();
+}
+
+class _SideBarState extends State<SideBar> {
+  String username = "";
+  String email = "";
+
+  void getUsernameandEmail() async {
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    setState(() {
+      username = (snap.data()! as Map<String, dynamic>)['username'];
+      email = (snap.data()! as Map<String, dynamic>)['email'];
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUsernameandEmail();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +44,21 @@ class SideBar extends StatelessWidget {
             child: ListView(children: [
               UserAccountsDrawerHeader(
                 accountName: Text(
-                  "Zhong Kai",
+                  "$username",
                   style: TextStyle(
                     fontFamily: 'Neometric',
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
                 ),
-                accountEmail: Text("tayzhongkai@gmail.com",
-                    style: TextStyle(
-                      fontFamily: 'Neometric',
-                      fontWeight: FontWeight.normal,
-                      fontSize: 16,
-                    )),
+                accountEmail: Text(
+                  "$email",
+                  style: TextStyle(
+                    fontFamily: 'Neometric',
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16,
+                  ),
+                ),
                 currentAccountPicture: CircleAvatar(
                     radius: 24,
                     backgroundColor: Colors.white,

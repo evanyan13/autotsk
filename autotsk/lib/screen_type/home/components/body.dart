@@ -8,8 +8,18 @@ import 'package:autotsk/screen_type/home/components/task.content.dart';
 import 'package:autotsk/screen_type/home/components/task_title.dart';
 import 'package:autotsk/util/color.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({super.key});
+
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +40,7 @@ class Body extends StatelessWidget {
               MeetingTitle(),
               MeetingEvent(),
             ],
-          )
+          ),
         ],
       ),
     );
