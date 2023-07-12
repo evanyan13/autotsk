@@ -3,8 +3,8 @@
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sugar/sugar.dart';
 
 class GreetingRow extends StatefulWidget {
   const GreetingRow({super.key});
@@ -27,7 +27,6 @@ class _GreetingRowState extends State<GreetingRow> {
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
-    print(snap.data());
 
     setState(() {
       username = (snap.data()! as Map<String, dynamic>)['username'];
@@ -38,7 +37,7 @@ class _GreetingRowState extends State<GreetingRow> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(25.0),
+        padding: const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -56,9 +55,6 @@ class _GreetingRowState extends State<GreetingRow> {
                         fontSize: 30,
                       ),
                     ),
-                    SizedBox(
-                      height: 4,
-                    ),
                     Text(
                       DateFormat("yMMMEd").format(DateTime.now()),
                       style: TextStyle(
@@ -67,7 +63,16 @@ class _GreetingRowState extends State<GreetingRow> {
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
                       ),
-                    )
+                    ),
+                    Text(
+                      '${DateFormat('hh : mm a').format(DateTime.now())}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Neometric',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
                   ],
                 ),
               ],

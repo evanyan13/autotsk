@@ -74,6 +74,7 @@ class _TaskContentState extends State<TaskContent> {
   }
 
   Future getAllTaskremoveDup() async {
+    await getAllTaskDetails();
     Set<String> seen = Set<String>();
     taskList = taskList.where((task) => seen.add(task)).toList();
 
@@ -83,24 +84,23 @@ class _TaskContentState extends State<TaskContent> {
   @override
   void initState() {
     addtasktoItems();
-    getAllTaskDetails();
     getAllTaskremoveDup();
     super.initState();
   }
 
-  Future<DocumentSnapshot> getinfo(String taskid) async {
-    DocumentSnapshot task = await FirebaseFirestore.instance
+  Future<DocumentReference> getinfo(String taskid) async {
+    DocumentReference task = await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('tasks')
-        .doc(taskid)
-        .get();
+        .doc(taskid);
 
     return task;
   }
 
   Future<Widget> buildDisplay(String taskid) async {
-    DocumentSnapshot task = await getinfo(taskid);
+    DocumentReference tasking = await getinfo(taskid);
+    DocumentSnapshot task = await tasking.get();
     TaskModel taskModel = TaskModel(
       uid: task['Task ID'],
       title: task['title'],
@@ -128,7 +128,7 @@ class _TaskContentState extends State<TaskContent> {
             builder: (context, snapshot) {
               return CarouselSlider.builder(
                 carouselController: controller,
-                itemCount: taskList.length,
+                itemCount: items.length,
                 itemBuilder: (context, index, secondIndex) {
                   return Container(
                     width: MediaQuery.of(context).size.width * 0.8,
