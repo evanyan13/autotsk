@@ -2,8 +2,6 @@
 import 'package:autotsk/onboarding/ob1.dart';
 import 'package:autotsk/onboarding/ob2.dart';
 import 'package:autotsk/onboarding/ob3.dart';
-import 'package:autotsk/screen_type/calendar/calendar_page.dart';
-import 'package:autotsk/screen_type/to_do/to_do_page.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/screen_type/signin_page.dart';
@@ -38,9 +36,9 @@ class MyApp extends StatelessWidget {
         '/ob3': (context) => OnboardingThird(),
         '/signin': (context) => Signin(),
         '/signup': (context) => SignUp(),
-        '/onboarding': (context) => PageV(),
+        '/home': (context) => PageV(),
         '/addtaskform': (context) => AddTask(),
-        '/home': (context) => HomePage(),
+        '/homepage': (context) => HomePage(),
       },
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -62,7 +60,9 @@ class MyApp extends StatelessWidget {
           }
 
           // Default shows Onboarding Page
-          return const PageV();
+          else {
+            return const PageV();
+          }
         },
       ),
       theme: ThemeData(
