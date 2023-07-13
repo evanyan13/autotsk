@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:autotsk/onboarding/pageview.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
@@ -16,6 +17,7 @@ class SideBar extends StatefulWidget {
 class _SideBarState extends State<SideBar> {
   String username = "";
   String email = "";
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   void getUsernameandEmail() async {
     DocumentSnapshot snap = await FirebaseFirestore.instance
@@ -160,23 +162,63 @@ class _SideBarState extends State<SideBar> {
                         MaterialPageRoute(builder: (context) => ToDoPage()));
                   }),
               ListTile(
-                  leading: Icon(
-                    Icons.logout,
+                leading: Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                ),
+                title: Text(
+                  "Log Out",
+                  style: TextStyle(
+                    fontFamily: 'Neometric',
+                    fontWeight: FontWeight.normal,
                     color: Colors.white,
+                    fontSize: 20,
                   ),
-                  title: Text(
-                    "Log Out",
-                    style: TextStyle(
-                      fontFamily: 'Neometric',
-                      fontWeight: FontWeight.normal,
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => ToDoPage()));
-                  }),
+                ),
+                onTap: () async {
+                  showDialog(
+                      // prevents people from clicking outside of the box to cancel the dialog.
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (BuildContext contxt) {
+                        return AlertDialog(
+                          title: Row(
+                            children: [
+                              Image.asset(
+                                'assets/danger.png',
+                                height: 30,
+                                width: 30,
+                              ),
+                              SizedBox(width: 20),
+                              Text('Sign Out'),
+                            ],
+                          ),
+                          content: Text('Are you sure you want to sign out?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () async {
+                                Navigator.of(context).pop(context);
+                              },
+                              child: Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                await _auth
+                                    .signOut()
+                                    .then((value) => Navigator.pop(context))
+                                    .then((value) => Navigator.of(context)
+                                        .pushAndRemoveUntil(
+                                            MaterialPageRoute(
+                                                builder: (context) => PageV()),
+                                            (route) => false));
+                              },
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      });
+                },
+              ),
               ListTile(
                   leading: Icon(
                     Icons.nightlight_round,
