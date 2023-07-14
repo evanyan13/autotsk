@@ -31,13 +31,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    setUp();
     super.initState();
     _pageController = PageController();
-  }
-
-  void setUp() {
-    TaskContent();
   }
 
   @override

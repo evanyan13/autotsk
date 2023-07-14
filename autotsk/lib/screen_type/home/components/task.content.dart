@@ -18,12 +18,31 @@ class TaskContent extends StatefulWidget {
 class _TaskContentState extends State<TaskContent> {
   int activeIndex = 0;
   final controller = CarouselController();
-  List<String> items = ["item 0"];
+  List<String> items = [];
   late int tasksCount;
   late String username;
   List<String> taskList = [];
+  late int task_length;
+  late int item_length;
+  late List<Widget> display = [];
 
-  Future<void> addtasktoItems() async {
+  @override
+  void initState() {
+    awaitMethod();
+    super.initState();
+  }
+
+  void awaitMethod() async {
+    item_length = await addtasktoItems();
+    task_length = await taskCount();
+    taskList = await getAllTaskremoveDup();
+    for (int i = 0; i < task_length; i++) {
+      Widget ui = await buildDisplay(taskList[i]);
+      display.add(ui);
+    }
+  }
+
+  Future<int> addtasktoItems() async {
     QuerySnapshot<Map<String, dynamic>> tasksCollection =
         await FirebaseFirestore.instance
             .collection('users')
@@ -32,7 +51,7 @@ class _TaskContentState extends State<TaskContent> {
             .get();
 
     if (items.length != tasksCollection.docs.length) {
-      for (int i = 1; i < tasksCollection.docs.length; i++) {
+      for (int i = 0; i < tasksCollection.docs.length; i++) {
         items.add("items ${i}");
       }
       if (items.length > tasksCollection.docs.length) {
@@ -43,6 +62,8 @@ class _TaskContentState extends State<TaskContent> {
         items.length = 8;
       }
     }
+
+    return items.length;
   }
 
   Future<int> taskCount() async {
@@ -70,7 +91,6 @@ class _TaskContentState extends State<TaskContent> {
         );
 
     // print(snap.docs.map((task) => task.data()));
-    // return snap.docs.map((task) => task.data()).toList();
   }
 
   Future getAllTaskremoveDup() async {
@@ -78,14 +98,8 @@ class _TaskContentState extends State<TaskContent> {
     Set<String> seen = Set<String>();
     taskList = taskList.where((task) => seen.add(task)).toList();
 
+    print(taskList);
     return taskList;
-  }
-
-  @override
-  void initState() {
-    addtasktoItems();
-    getAllTaskremoveDup();
-    super.initState();
   }
 
   Future<DocumentReference> getinfo(String taskid) async {
@@ -103,17 +117,128 @@ class _TaskContentState extends State<TaskContent> {
     DocumentSnapshot task = await tasking.get();
     TaskModel taskModel = TaskModel(
       uid: task['Task ID'],
-      title: task['title'],
-      date: task['date'],
+      title: task['Title'],
+      date: task['Date'],
       startTime: task['Start Time'],
-      endTime: task['end Time'],
-      priority: task['priority'],
+      endTime: task['End Time'],
+      priority: task['Priority'],
       location: task['Location'],
       notes: task['Notes'],
     );
 
     return Container(
-      child: Text('hello'),
+      constraints: BoxConstraints(maxWidth: 325),
+      child: Column(
+        children: [
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Task: ${taskModel.title}",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                width: 300 / 2 - 6.5,
+                height: 40,
+                child: Column(
+                  children: [
+                    SizedBox(height: 10),
+                    Text(
+                      "Date: ${taskModel.date}",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 40,
+                width: 325 / 2 - 6.5,
+                child: Column(
+                  children: [
+                    SizedBox(height: 4),
+                    Text(
+                      'Start Time: ${taskModel.startTime}',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      'End Time: ${taskModel.endTime}',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 7),
+          Row(
+            children: [
+              Container(
+                width: 300 / 2 - 6.5,
+                height: 30,
+                child: Column(
+                  children: [
+                    Text(
+                      "Importance: ${taskModel.priority}",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  SizedBox(width: 10),
+                  Container(
+                    height: 30,
+                    width: 325 / 2 - 6.5,
+                    child: Text(
+                      'Location: ${taskModel.location}',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 25,
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                'click to see the full details',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.orange,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -123,38 +248,33 @@ class _TaskContentState extends State<TaskContent> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FutureBuilder(
-            future: getAllTaskremoveDup(),
-            builder: (context, snapshot) {
-              return CarouselSlider.builder(
-                carouselController: controller,
-                itemCount: items.length,
-                itemBuilder: (context, index, secondIndex) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: BoxDecoration(
-                      color: homePageBgLightPurpleClr,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Center(
-                      child: Row(
-                        children: <Widget>[
-                          Text('$index'),
-                        ],
-                      ),
-                    ),
-                    // Image.asset(images, fit: BoxFit.fitHeight),
-                  );
-                },
-                options: CarouselOptions(
-                  height: MediaQuery.of(context).size.width * 0.4,
-                  enableInfiniteScroll: true,
-                  enlargeCenterPage: true,
-                  onPageChanged: (index, reason) =>
-                      setState(() => activeIndex = index),
+          CarouselSlider.builder(
+            carouselController: controller,
+            itemCount: taskList.length,
+            itemBuilder: (context, index, secondIndex) {
+              return Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                decoration: BoxDecoration(
+                  color: homePageBgLightPurpleClr,
+                  borderRadius: BorderRadius.circular(20),
                 ),
+                child: Center(
+                  child: display.isEmpty
+                      ? Text(
+                          "No task yet, swipe to see if you have any outstanding tasks",
+                        )
+                      : Center(child: display[index]),
+                ),
+                // Image.asset(images, fit: BoxFit.fitHeight),
               );
             },
+            options: CarouselOptions(
+              height: MediaQuery.of(context).size.width * 0.4,
+              enableInfiniteScroll: true,
+              enlargeCenterPage: true,
+              onPageChanged: (index, reason) =>
+                  setState(() => activeIndex = index),
+            ),
           ),
           SizedBox(height: 16.0),
           buildIndicator(),
@@ -168,7 +288,7 @@ class _TaskContentState extends State<TaskContent> {
         effect: ExpandingDotsEffect(
             dotHeight: 12, dotWidth: 12, activeDotColor: Colors.lightBlue),
         activeIndex: activeIndex,
-        count: items.length,
+        count: taskList.length,
       );
 
   void animateToSlide(int index) => controller.animateToPage(index);
