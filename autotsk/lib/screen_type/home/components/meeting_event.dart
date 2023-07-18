@@ -19,6 +19,7 @@ class _MeetingEventState extends State<MeetingEvent> {
     "Item 1",
     "Item 2",
     "Item 3",
+    "Item 4",
   ];
 
   @override
@@ -34,13 +35,15 @@ class _MeetingEventState extends State<MeetingEvent> {
                 return buildItem(items[index], index);
               },
               options: CarouselOptions(
+                  autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 3),
                   height: MediaQuery.of(context).size.width * 0.4,
                   enableInfiniteScroll: true,
                   enlargeCenterPage: true,
                   onPageChanged: (index, reason) =>
                       setState(() => activeIndex = index))),
           SizedBox(height: 16.0),
-          buildIndicator()
+          buildIndicator(),
         ],
       ),
     );
@@ -57,12 +60,12 @@ class _MeetingEventState extends State<MeetingEvent> {
   void animateToSlide(int index) => controller.animateToPage(index);
 
   Widget buildItem(String items, int index) => Container(
-      width: MediaQuery.of(context).size.width * 0.8,
-      decoration: BoxDecoration(
-        color: homePageBgLightPurpleClr,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Center(child: Text("Meeting $index"))
-      // Image.asset(images, fit: BoxFit.fitHeight),
+        width: MediaQuery.of(context).size.width * 0.8,
+        decoration: BoxDecoration(
+          color: homePageBgLightPurpleClr,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Center(child: Text("Meeting $index")),
+        // Image.asset(images, fit: BoxFit.fitHeight),
       );
 }

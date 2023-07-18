@@ -18,12 +18,9 @@ class TaskContent extends StatefulWidget {
 class _TaskContentState extends State<TaskContent> {
   int activeIndex = 0;
   final controller = CarouselController();
-  List<String> items = [];
-  late int tasksCount;
   late String username;
   late List<String> taskList = [];
   late int task_length;
-  late int item_length;
   late List<Widget> display = [];
 
   @override
@@ -32,38 +29,14 @@ class _TaskContentState extends State<TaskContent> {
     super.initState();
   }
 
-  void awaitMethod() async {
-    item_length = await addtasktoItems();
+  Future<List> awaitMethod() async {
     task_length = await taskCount();
     taskList = await getAllTaskremoveDup();
     for (int i = 0; i < task_length; i++) {
       Widget ui = await buildDisplay(taskList[i]);
       display.add(ui);
     }
-  }
-
-  Future<int> addtasktoItems() async {
-    QuerySnapshot<Map<String, dynamic>> tasksCollection =
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .collection('tasks')
-            .get();
-
-    if (items.length != tasksCollection.docs.length) {
-      for (int i = 0; i < tasksCollection.docs.length; i++) {
-        items.add("items ${i}");
-      }
-      if (items.length > tasksCollection.docs.length) {
-        items.length = tasksCollection.docs.length;
-      }
-
-      if (items.length > 8) {
-        items.length = 8;
-      }
-    }
-
-    return items.length;
+    return taskList;
   }
 
   Future<int> taskCount() async {
@@ -98,7 +71,6 @@ class _TaskContentState extends State<TaskContent> {
     Set<String> seen = Set<String>();
     taskList = taskList.where((task) => seen.add(task)).toList();
 
-    print(taskList);
     return taskList;
   }
 
@@ -130,7 +102,7 @@ class _TaskContentState extends State<TaskContent> {
       constraints: BoxConstraints(maxWidth: 325),
       child: Column(
         children: [
-          SizedBox(height: 10),
+          SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -235,68 +207,76 @@ class _TaskContentState extends State<TaskContent> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CarouselSlider.builder(
-            carouselController: controller,
-            itemCount: taskList.length,
-            itemBuilder: (context, index, secondIndex) {
-              return Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                decoration: BoxDecoration(
-                  color: homePageBgLightPurpleClr,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Center(
-                  child: display.isEmpty
-                      ? Text(
-                          "No task yet, swipe to see if you have any outstanding tasks",
-                        )
-                      : Center(child: display[index]),
-                ),
-                // Image.asset(images, fit: BoxFit.fitHeight),
-              );
+          FutureBuilder(
+            future: awaitMethod(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    snapshot.error.toString(),
+                  ),
+                );
+              } else {
+                return CarouselSlider.builder(
+                  carouselController: controller,
+                  itemCount: taskList.length,
+                  itemBuilder: (context, index, secondIndex) {
+                    return Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      decoration: BoxDecoration(
+                        color: homePageBgLightPurpleClr,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: display.isEmpty
+                            ? Text(
+                                "No task yet, swipe to see if you have any outstanding tasks",
+                              )
+                            : Center(child: display[index]),
+                      ),
+                      // Image.asset(images, fit: BoxFit.fitHeight),
+                    );
+                  },
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 5),
+                    height: MediaQuery.of(context).size.width * 0.4,
+                    enableInfiniteScroll: true,
+                    enlargeCenterPage: true,
+                    onPageChanged: (index, reason) {
+                      setState(
+                        () => activeIndex = index,
+                      );
+                    },
+                  ),
+                );
+              }
             },
-            options: CarouselOptions(
-              height: MediaQuery.of(context).size.width * 0.4,
-              enableInfiniteScroll: true,
-              enlargeCenterPage: true,
-              onPageChanged: (index, reason) =>
-                  setState(() => activeIndex = index),
-            ),
           ),
           SizedBox(height: 16.0),
-          buildIndicator(),
+          FutureBuilder(
+            future: awaitMethod(),
+            builder: (context, snapshot) {
+              return buildIndicator();
+            },
+          ),
         ],
       ),
     );
   }
 
-  Widget buildIndicator() => AnimatedSmoothIndicator(
-        onDotClicked: animateToSlide,
-        effect: ExpandingDotsEffect(
-            dotHeight: 12, dotWidth: 12, activeDotColor: Colors.lightBlue),
-        activeIndex: activeIndex,
-        count: taskList.length,
-      );
-
-  void animateToSlide(int index) => controller.animateToPage(index);
-
-  Widget buildItem(String items, int index) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.8,
-      decoration: BoxDecoration(
-        color: homePageBgLightPurpleClr,
-        borderRadius: BorderRadius.circular(20),
+  Widget buildIndicator() {
+    return AnimatedSmoothIndicator(
+      onDotClicked: animateToSlide,
+      effect: ExpandingDotsEffect(
+        dotHeight: 12,
+        dotWidth: 12,
+        activeDotColor: Colors.lightBlue,
       ),
-      child: Center(
-        child: Row(
-          children: <Widget>[
-            Center(
-              child: Text('$index'),
-            ),
-          ],
-        ),
-      ),
-      // Image.asset(images, fit: BoxFit.fitHeight),
+      activeIndex: activeIndex,
+      count: taskList.length,
     );
   }
+
+  void animateToSlide(int index) => controller.animateToPage(index);
 }
