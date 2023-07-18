@@ -27,8 +27,8 @@ class _MeetingEventState extends State<MeetingEvent> {
 
   @override
   void initState() {
-    super.initState();
     awaitMethod();
+    super.initState();
   }
 
   Future<int> taskCount() async {
@@ -289,7 +289,7 @@ class _MeetingEventState extends State<MeetingEvent> {
               } else {
                 return CarouselSlider.builder(
                   carouselController: controller,
-                  itemCount: meetingDisplay.length,
+                  itemCount: meetingList.length + 2,
                   itemBuilder: (context, index, secondIndex) {
                     return Container(
                       width: MediaQuery.of(context).size.width * 0.8,
@@ -344,7 +344,7 @@ class _MeetingEventState extends State<MeetingEvent> {
         activeDotColor: Colors.lightBlue,
       ),
       activeIndex: activeIndex,
-      count: meetingList.length,
+      count: meetingList.length + 2,
     );
   }
 
