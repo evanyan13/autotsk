@@ -21,7 +21,7 @@ class _TaskContentState extends State<TaskContent> {
   List<String> items = [];
   late int tasksCount;
   late String username;
-  List<String> taskList = [];
+  late List<String> taskList = [];
   late int task_length;
   late int item_length;
   late List<Widget> display = [];
@@ -223,19 +223,6 @@ class _TaskContentState extends State<TaskContent> {
                 ],
               ),
             ],
-          ),
-          SizedBox(
-            height: 25,
-            child: TextButton(
-              onPressed: () {},
-              child: Text(
-                'click to see the full details',
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.orange,
-                ),
-              ),
-            ),
           ),
         ],
       ),
