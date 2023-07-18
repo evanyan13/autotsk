@@ -230,7 +230,7 @@ class _TaskContentState extends State<TaskContent> {
                       child: Center(
                         child: display.isEmpty
                             ? Text(
-                                "No task yet, swipe to see if you have any outstanding tasks",
+                                "Yay! you have no outstanding Tasks",
                               )
                             : Center(child: display[index]),
                       ),
@@ -238,7 +238,10 @@ class _TaskContentState extends State<TaskContent> {
                     );
                   },
                   options: CarouselOptions(
-                    autoPlay: true,
+                    scrollPhysics: taskList.length <= 1
+                        ? NeverScrollableScrollPhysics()
+                        : AlwaysScrollableScrollPhysics(),
+                    autoPlay: taskList.length <= 1 ? false : true,
                     autoPlayInterval: Duration(seconds: 5),
                     height: MediaQuery.of(context).size.width * 0.4,
                     enableInfiniteScroll: true,
