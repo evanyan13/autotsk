@@ -35,6 +35,7 @@ class _BodyState extends State<Body> {
               TaskContent(),
             ],
           ),
+          SizedBox(height: 20),
           Column(
             children: [
               MeetingTitle(),

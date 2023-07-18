@@ -12,7 +12,7 @@ class MeetingTitle extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-              height: 24,
+              height: 35,
               child: Stack(
                 children: <Widget>[
                   Text(
