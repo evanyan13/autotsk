@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:autotsk/screen_type/home/viewall_page.dart';
+import 'package:autotsk/screen_type/home/components/viewall_page.dart';
 
 class TaskTitle extends StatelessWidget {
   const TaskTitle({super.key});
@@ -31,7 +31,7 @@ class TaskTitle extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: ((context) => ViewAll()),
+                  builder: ((context) => ViewAllTask()),
                 ),
               );
             },
