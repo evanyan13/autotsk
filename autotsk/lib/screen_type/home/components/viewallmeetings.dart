@@ -3,38 +3,29 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:autotsk/add_task/task_model.dart';
 
-import '../../add_task/task_model.dart';
-
-class ViewAll extends StatefulWidget {
-  const ViewAll({super.key});
+class ViewAllMeetings extends StatefulWidget {
+  const ViewAllMeetings({super.key});
 
   @override
-  State<ViewAll> createState() => _ViewAllState();
+  State<ViewAllMeetings> createState() => _ViewAllMeetingsState();
 }
 
-class _ViewAllState extends State<ViewAll> {
+class _ViewAllMeetingsState extends State<ViewAllMeetings> {
   bool isLight = false;
-  late String username;
-  late List<String> taskList = [];
+  int activeIndex = 0;
+  late List taskList = [];
+  late List meetingList = [];
   late int task_length;
-  late List<Widget> display = [];
+  late List meetingDisplay = [];
+  late bool isTitleMeeting = false;
+  late bool isNotesMeeting = false;
 
   @override
   void initState() {
     awaitMethod();
     super.initState();
-  }
-
-  Future<List> awaitMethod() async {
-    task_length = await taskCount();
-    taskList = await getAllTaskremoveDup();
-    for (int i = 0; i < task_length; i++) {
-      Widget ui = await buildDisplay(taskList[i]);
-      display.add(ui);
-    }
-
-    return taskList;
   }
 
   Future<int> taskCount() async {
@@ -68,7 +59,20 @@ class _ViewAllState extends State<ViewAll> {
     await getAllTaskDetails();
     Set<String> seen = Set<String>();
     taskList = taskList.where((task) => seen.add(task)).toList();
+
     return taskList;
+  }
+
+  List getMeetingList() {
+    return meetingList;
+  }
+
+  Future getAllMeetingremoveDup() async {
+    getMeetingList();
+    Set<String> seen = Set<String>();
+    meetingList = meetingList.where((task) => seen.add(task)).toList();
+
+    return meetingList;
   }
 
   Future<DocumentReference> getinfo(String taskid) async {
@@ -79,6 +83,76 @@ class _ViewAllState extends State<ViewAll> {
         .doc(taskid);
 
     return task;
+  }
+
+  Future awaitMethod() async {
+    task_length = await taskCount();
+    taskList = await getAllTaskremoveDup();
+
+    for (int i = 0; i < taskList.length; i++) {
+      isTitleMeeting = await checkMeetingTaskforTitle(taskList[i]);
+      isNotesMeeting = await checkMeetingTaskforNotes(taskList[i]);
+      if (isTitleMeeting || isNotesMeeting) {
+        meetingList = await getAllMeetingremoveDup();
+        Widget ui = await buildDisplay(taskList[i]);
+        meetingDisplay.add(ui);
+      }
+    }
+
+    return meetingList;
+  }
+
+  Future<bool> checkMeetingTaskforNotes(String taskid) async {
+    DocumentReference tasking = await getinfo(taskid);
+    DocumentSnapshot task = await tasking.get();
+    TaskModel taskModel = TaskModel(
+      uid: task['Task ID'],
+      title: task['Title'],
+      date: task['Date'],
+      startTime: task['Start Time'],
+      endTime: task['End Time'],
+      priority: task['Priority'],
+      location: task['Location'],
+      notes: task['Notes'],
+    );
+
+    List<String> splitTitle = taskModel.title.split(" ");
+    for (int i = 0; i < splitTitle.length; i++) {
+      if (splitTitle[i].toLowerCase() == "meetings" ||
+          splitTitle[i].toLowerCase() == "meeting" ||
+          splitTitle[i].toLowerCase() == "appointment" ||
+          splitTitle[i].toLowerCase() == "appointments") {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // responsible for checking if the particular task is a meeting task
+  Future<bool> checkMeetingTaskforTitle(String taskid) async {
+    DocumentReference tasking = await getinfo(taskid);
+    DocumentSnapshot task = await tasking.get();
+    TaskModel taskModel = TaskModel(
+      uid: task['Task ID'],
+      title: task['Title'],
+      date: task['Date'],
+      startTime: task['Start Time'],
+      endTime: task['End Time'],
+      priority: task['Priority'],
+      location: task['Location'],
+      notes: task['Notes'],
+    );
+
+    List<String> splitNotes = taskModel.notes.split(" ");
+    for (int i = 0; i < splitNotes.length; i++) {
+      if (splitNotes[i].toLowerCase() == "meetings" ||
+          splitNotes[i].toLowerCase() == "meeting" ||
+          splitNotes[i].toLowerCase() == "appointment" ||
+          splitNotes[i].toLowerCase() == "appointments") {
+        return true;
+      }
+    }
+    return false;
   }
 
   Future<Widget> buildDisplay(String taskid) async {
@@ -316,9 +390,9 @@ class _ViewAllState extends State<ViewAll> {
               );
             } else {
               return ListView.separated(
-                itemCount: taskList.length,
+                itemCount: meetingDisplay.length,
                 itemBuilder: (context, index) {
-                  return display[index];
+                  return meetingDisplay[index];
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return const Divider(

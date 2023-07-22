@@ -13,7 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:autotsk/screen_type/home/home_page.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:autotsk/screen_type/home/viewall_page.dart';
+import 'package:autotsk/screen_type/home/components/viewall_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
