@@ -7,8 +7,7 @@ import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import "package:autotsk/util/color.dart";
 import 'package:autotsk/screen_type/common_components/side_bar.dart';
-import 'package:autotsk/screen_type/common_components/nav_bar_dark.dart';
-import 'package:autotsk/screen_type/to_do/get_datadb.dart';
+import 'package:autotsk/screen_type/common_components/get_datadb.dart';
 import 'package:intl/intl.dart';
 
 class ToDoPage extends StatefulWidget {
