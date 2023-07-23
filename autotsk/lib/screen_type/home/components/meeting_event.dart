@@ -29,6 +29,7 @@ class _MeetingEventState extends State<MeetingEvent> {
   void initState() {
     awaitMethod();
     super.initState();
+    getMeetingList();
   }
 
   Future<int> taskCount() async {
@@ -66,7 +67,7 @@ class _MeetingEventState extends State<MeetingEvent> {
     return taskList;
   }
 
-  List getAllMeetingremoveDup() {
+  Future getAllMeetingremoveDup() async {
     Set<String> seen = Set<String>();
     meetingList = meetingList.where((task) => seen.add(task)).toList();
 
@@ -83,21 +84,22 @@ class _MeetingEventState extends State<MeetingEvent> {
     return task;
   }
 
-  Future<List> awaitMethod() async {
+  Future awaitMethod() async {
     task_length = await taskCount();
-    taskList = await getAllTaskremoveDup();
+  }
 
+  Future getMeetingList() async {
+    taskList = await getAllTaskremoveDup();
     for (int i = 0; i < taskList.length; i++) {
-      meetingList = getAllMeetingremoveDup();
       isTitleMeeting = await checkMeetingTaskforTitle(taskList[i]);
       isNotesMeeting = await checkMeetingTaskforNotes(taskList[i]);
       if (isTitleMeeting || isNotesMeeting) {
         Widget ui = await buildDisplay(taskList[i]);
         meetingDisplay.add(ui);
+        meetingList.add(taskList[i]);
+        meetingList = await getAllMeetingremoveDup();
       }
     }
-
-    return meetingDisplay;
   }
 
   Future<bool> checkMeetingTaskforNotes(String taskid) async {
@@ -278,7 +280,7 @@ class _MeetingEventState extends State<MeetingEvent> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FutureBuilder(
-            future: awaitMethod(),
+            future: getMeetingList(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Center(
@@ -289,7 +291,7 @@ class _MeetingEventState extends State<MeetingEvent> {
               } else {
                 return CarouselSlider.builder(
                   carouselController: controller,
-                  itemCount: meetingList.length + 2,
+                  itemCount: meetingList.length,
                   itemBuilder: (context, index, secondIndex) {
                     return Container(
                       width: MediaQuery.of(context).size.width * 0.8,
@@ -302,7 +304,9 @@ class _MeetingEventState extends State<MeetingEvent> {
                             ? Text(
                                 "No outstanding Meetings",
                               )
-                            : Center(child: meetingDisplay[index]),
+                            : Center(
+                                child: meetingDisplay[index],
+                              ),
                       ),
                       // Image.asset(images, fit: BoxFit.fitHeight),
                     );
@@ -325,7 +329,7 @@ class _MeetingEventState extends State<MeetingEvent> {
           ),
           SizedBox(height: 16.0),
           FutureBuilder(
-            future: awaitMethod(),
+            future: getMeetingList(),
             builder: ((context, snapshot) {
               return buildIndicator();
             }),
@@ -344,7 +348,7 @@ class _MeetingEventState extends State<MeetingEvent> {
         activeDotColor: Colors.lightBlue,
       ),
       activeIndex: activeIndex,
-      count: meetingList.length + 2,
+      count: meetingList.length,
     );
   }
 

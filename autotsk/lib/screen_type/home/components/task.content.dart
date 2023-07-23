@@ -232,7 +232,9 @@ class _TaskContentState extends State<TaskContent> {
                             ? Text(
                                 "Yay! you have no outstanding Tasks",
                               )
-                            : Center(child: display[index]),
+                            : Center(
+                                child: display[index],
+                              ),
                       ),
                       // Image.asset(images, fit: BoxFit.fitHeight),
                     );
