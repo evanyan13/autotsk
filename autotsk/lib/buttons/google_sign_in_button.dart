@@ -2,7 +2,6 @@
 
 import 'package:autotsk/auth/google_auth.dart';
 import 'package:autotsk/screen_type/home/home_page.dart';
-import 'package:autotsk/screen_type/signin_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,53 +15,37 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        // _isSigningIn
-        //   ? CircularProgressIndicator(
-        //       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-        //     )
-        //   : 
-          OutlinedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.white),
-                shape: MaterialStateProperty.all(
-                  CircleBorder(
-                  
-                  ),
-                ),
+    return Row(children: [
+      OutlinedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          shape: MaterialStateProperty.all(
+            CircleBorder(),
+          ),
+        ),
+        child: Image(
+          image: AssetImage("assets/Googleicon.png"),
+          width: 56.0,
+        ),
+        onPressed: () async {
+          setState(() {
+            _isSigningIn = true;
+          });
+
+          User? user = await GoogleAuth.signInWithGoogle(context: context);
+
+          if (user != null) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => HomePage(),
               ),
-              child: Image(
-                image: AssetImage("assets/Googleicon.png"),
-                height: 56.0,
-              ),
-
-              onPressed: () async {
-                setState(() {
-                  _isSigningIn = true;
-                });
-
-                User? user =
-                    await GoogleAuth.signInWithGoogle(context: context);
-
-                setState(() {
-                  _isSigningIn = false;
-                });
-
-                if (user != null) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(),
-                    ),
-                  );
-                } else {
-                  setState(() {
-                  _isSigningIn = false;
-                  });
-                }
-              },
-            ),
-      ]
-    );
+            );
+          }
+          setState(() {
+            _isSigningIn = false;
+          });
+        },
+      ),
+    ]);
   }
 }

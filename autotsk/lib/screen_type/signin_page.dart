@@ -10,6 +10,8 @@ import 'package:autotsk/auth/auth_methods.dart';
 import 'package:autotsk/screen_type/home/home_page.dart';
 import 'package:autotsk/screen_type/signup_page.dart';
 
+import '../buttons/github_sign_in_button.dart';
+
 // dimensions, width: 365, height: 623
 
 class Signin extends StatefulWidget {
@@ -253,19 +255,19 @@ class _SigninState extends State<Signin> {
                         ),
 
                         SizedBox(height: 20),
-
                         Row(
-                          // if you want the room, just take anybox and dont was them.
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            SizedBox(width: 20),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                InkWell(
-                                  onTap: () {
+                                OutlinedButton(
+                                  style: ButtonStyle(
+                                    side: MaterialStateProperty.all(BorderSide.none),
+                                  ),
+                                  onPressed: () {
                                     Navigator.push(
                                       context,
                                       HeroDialogRoute(
@@ -277,9 +279,10 @@ class _SigninState extends State<Signin> {
                                   },
                                   child: Image(
                                     image: AssetImage('assets/darkEmail.png'),
+                                    width: 56,
                                   ),
                                 ),
-                                SizedBox(height: 3),
+                                SizedBox(height: 4),
                                 Text(
                                   "Email",
                                   style: TextStyle(
@@ -308,21 +311,16 @@ class _SigninState extends State<Signin> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image(
-                                  image: AssetImage('assets/Appleicon.png'),
-                                ),
+                                GitHubSignInButton(),
+                                SizedBox(height: 4),
                                 Text(
-                                  "Apple",
+                                  "GitHub",
                                   style: TextStyle(
                                     fontFamily: "Neometric",
                                     fontSize: 13,
                                   ),
                                 ),
-                                SizedBox(height: 3),
                               ],
-                            ),
-                            SizedBox(
-                              width: 13,
                             ),
                           ],
                         ),
