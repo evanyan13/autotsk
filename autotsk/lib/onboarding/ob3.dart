@@ -85,7 +85,7 @@ class _OnboardingThirdState extends State<OnboardingThird> {
                     borderRadius: BorderRadius.all(
                       Radius.circular(20.0),
                     ),
-                    color: mainLightBgColour,
+                    color: Colors.white,
                   ),
                   padding: EdgeInsets.fromLTRB(25.0, 20.0, 15.0, 10.0),
                 ),
