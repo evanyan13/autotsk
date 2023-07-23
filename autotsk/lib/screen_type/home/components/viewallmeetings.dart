@@ -171,7 +171,7 @@ class _ViewAllMeetingsState extends State<ViewAllMeetings> {
     return Container(
       constraints: BoxConstraints(maxWidth: 300),
       decoration: BoxDecoration(
-        color: Colors.purple,
+        color: buttondarkBlueClr,
         borderRadius: BorderRadius.all(
           Radius.circular(30.0),
         ),

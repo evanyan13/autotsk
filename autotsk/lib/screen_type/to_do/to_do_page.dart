@@ -1,12 +1,340 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:autotsk/add_task/task_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import "package:autotsk/util/color.dart";
 import 'package:autotsk/screen_type/common_components/side_bar.dart';
 import 'package:autotsk/screen_type/common_components/nav_bar_dark.dart';
+import 'package:autotsk/screen_type/to_do/get_datadb.dart';
+import 'package:intl/intl.dart';
 
-class ToDoPage extends StatelessWidget {
+class ToDoPage extends StatefulWidget {
   const ToDoPage({super.key});
+
+  @override
+  State<ToDoPage> createState() => _ToDoPageState();
+}
+
+class _ToDoPageState extends State<ToDoPage> {
+  late int task_length;
+  late List taskList;
+  GetDataDb dataObject = GetDataDb();
+  late int todaysTaskLength = 0;
+  late int imptTaskLength = 0;
+  late List imptDisplay = [];
+
+  Future<int> getTaskCount() async {
+    return await dataObject.taskCount();
+  }
+
+  Future getTaskDetails() async {
+    return await dataObject.getAllTaskDetails();
+  }
+
+  Future getTaskDetailsOnce() async {
+    return await dataObject.getAllTaskremoveDup();
+  }
+
+  Future getTaskInfo(String taskid) async {
+    return await dataObject.getinfo(taskid);
+  }
+
+  Future getTodaysTask() async {
+    dynamic allTask = await getTaskDetailsOnce();
+    String todaysDate = DateFormat.yMd().format(DateTime.now());
+    List todaysTaskList = [];
+    for (int i = 0; i < allTask.length / 2; i++) {
+      if ((await getTaskDate(allTask[i])) == todaysDate) {
+        todaysTaskList.add(allTask[i]);
+      }
+    }
+    todaysTaskLength = todaysTaskList.length;
+    return todaysTaskList.length;
+  }
+
+  Future getTaskDate(String taskid) async {
+    DocumentReference tasking = await getTaskInfo(taskid);
+    DocumentSnapshot task = await tasking.get();
+    TaskModel taskModel = TaskModel(
+      uid: task['Task ID'],
+      title: task['Title'],
+      date: task['Date'],
+      startTime: task['Start Time'],
+      endTime: task['End Time'],
+      priority: task['Priority'],
+      location: task['Location'],
+      notes: task['Notes'],
+    );
+    return taskModel.date;
+  }
+
+  Future getImportantTask() async {
+    dynamic allTask = await getTaskDetailsOnce();
+    List imptTaskList = [];
+    for (int i = 0; i < allTask.length / 2; i++) {
+      if ((await getTaskPriority(allTask[i])) == "High") {
+        Widget ui = await buildDisplay(allTask[i]);
+        imptDisplay.add(ui);
+        imptTaskList.add(allTask[i]);
+      }
+    }
+
+    imptTaskLength = imptTaskList.length;
+    return imptTaskLength;
+  }
+
+  Future getTaskPriority(String taskid) async {
+    DocumentReference tasking = await getTaskInfo(taskid);
+    DocumentSnapshot task = await tasking.get();
+    TaskModel taskModel = TaskModel(
+      uid: task['Task ID'],
+      title: task['Title'],
+      date: task['Date'],
+      startTime: task['Start Time'],
+      endTime: task['End Time'],
+      priority: task['Priority'],
+      location: task['Location'],
+      notes: task['Notes'],
+    );
+
+    return taskModel.priority;
+  }
+
+  Future awaitMethods() async {
+    task_length = await getTaskCount();
+    taskList = await getTaskDetailsOnce();
+  }
+
+  Future<DocumentReference> getinfo(String taskid) async {
+    DocumentReference task = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('tasks')
+        .doc(taskid);
+
+    return task;
+  }
+
+  Future<Widget> buildDisplay(String taskid) async {
+    DocumentReference tasking = await getinfo(taskid);
+    DocumentSnapshot task = await tasking.get();
+    TaskModel taskModel = TaskModel(
+      uid: task['Task ID'],
+      title: task['Title'],
+      date: task['Date'],
+      startTime: task['Start Time'],
+      endTime: task['End Time'],
+      priority: task['Priority'],
+      location: task['Location'],
+      notes: task['Notes'],
+    );
+    return Container(
+      constraints: BoxConstraints(maxWidth: 300),
+      decoration: BoxDecoration(
+        color: buttondarkBlueClr,
+        borderRadius: BorderRadius.all(
+          Radius.circular(30.0),
+        ),
+      ),
+      height: 150,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 15),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Task: ${taskModel.title}",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 300 / 2 - 6.5,
+                height: 40,
+                child: Column(
+                  children: [
+                    SizedBox(height: 10),
+                    Text(
+                      "Date: ${taskModel.date}",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 40,
+                width: 325 / 2 - 6.5,
+                child: Column(
+                  children: [
+                    SizedBox(height: 4),
+                    Text(
+                      'Start Time: ${taskModel.startTime}',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      'End Time: ${taskModel.endTime}',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 7),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(width: 10),
+              Container(
+                width: 300 / 2 - 6.5,
+                height: 30,
+                child: Text(
+                  "Importance: ${taskModel.priority}",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  SizedBox(width: 10),
+                  Container(
+                    height: 30,
+                    width: 325 / 2 - 6.5,
+                    child: Text(
+                      'Location: ${taskModel.location}',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 35,
+            child: TextButton(
+              onPressed: () {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (BuildContext buildcontext) {
+                    return CupertinoPopupSurface(
+                      child: Container(
+                        height: 600,
+                        width: double.infinity,
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            DefaultTextStyle(
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                              child: Text(
+                                'Title: ${taskModel.title}',
+                              ),
+                            ),
+                            DefaultTextStyle(
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                              child: Text(
+                                'Location: ${taskModel.location}',
+                              ),
+                            ),
+                            DefaultTextStyle(
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                              child: Text(
+                                'Date: ${taskModel.date}',
+                              ),
+                            ),
+                            DefaultTextStyle(
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                              child: Text(
+                                'Start Time: ${taskModel.startTime}',
+                              ),
+                            ),
+                            DefaultTextStyle(
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                              child: Text(
+                                'End Time: ${taskModel.endTime}',
+                              ),
+                            ),
+                            DefaultTextStyle(
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                              child: Text(
+                                'Importance: ${taskModel.priority}',
+                              ),
+                            ),
+                            DefaultTextStyle(
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                              child: Text(
+                                'Notes: ${taskModel.notes}',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Text(
+                'click to see the full details',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.orange,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    awaitMethods();
+  }
 
   Widget catTaskCont(String task, int numTask) {
     return Container(
@@ -132,84 +460,78 @@ class ToDoPage extends StatelessWidget {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(height: 15),
-                taskCont('Today', 1),
-                SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        catTaskCont('Run', 3),
-                        SizedBox(height: 20),
-                        catTaskCont('Fly', 4),
-                      ],
-                    ),
-                    SizedBox(width: 20),
-                    Column(
-                      children: [
-                        catTaskCont('Meetings', 3),
-                        SizedBox(height: 20),
-                        catTaskCont('Work', 4),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 25),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 40,
-                    ),
-                    Text(
-                      "Most Important Tasks",
-                      style: TextStyle(
-                        fontFamily: 'Neometric',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 15),
-                Container(
-                  height: 100,
-                  width: 325,
-                  decoration: BoxDecoration(
-                    color: homePageBgLightPurpleClr,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: 15),
+              FutureBuilder(
+                future: getTodaysTask(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else {
+                    return taskCont('Today', todaysTaskLength);
+                  }
+                },
+              ),
+              SizedBox(height: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      catTaskCont('Run', 3),
+                      SizedBox(height: 20),
+                      catTaskCont('Fly', 4),
+                    ],
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    children: [
+                      catTaskCont('Meetings', 3),
+                      SizedBox(height: 20),
+                      catTaskCont('Work', 4),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 25),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 40,
+                  ),
+                  Text(
+                    "Most Important Tasks",
+                    style: TextStyle(
+                      fontFamily: 'Neometric',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
                     ),
                   ),
-                ),
-                SizedBox(height: 15),
-                Container(
-                  height: 100,
-                  width: 325,
-                  decoration: BoxDecoration(
-                    color: homePageBgLightPurpleClr,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20.0),
+                ],
+              ),
+              SizedBox(height: 15),
+              FutureBuilder(
+                future: getImportantTask(),
+                builder: (builder, snapshot) {
+                  return Expanded(
+                    child: ListView.separated(
+                      itemCount: imptTaskLength,
+                      itemBuilder: (context, index) {
+                        return imptDisplay[index];
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const Divider(
+                          color: mainLightBgColour,
+                          height: 10,
+                        );
+                      },
                     ),
-                  ),
-                ),
-                SizedBox(height: 15),
-                Container(
-                  height: 100,
-                  width: 325,
-                  decoration: BoxDecoration(
-                    color: homePageBgLightPurpleClr,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20.0),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
         // bottomNavigationBar: NavBarDark(),
@@ -240,3 +562,36 @@ class ToDoPage extends StatelessWidget {
     );
   }
 }
+
+/*              Container(
+                height: 100,
+                width: 325,
+                decoration: BoxDecoration(
+                  color: homePageBgLightPurpleClr,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20.0),
+                  ),
+                ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                height: 100,
+                width: 325,
+                decoration: BoxDecoration(
+                  color: homePageBgLightPurpleClr,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20.0),
+                  ),
+                ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                height: 100,
+                width: 325,
+                decoration: BoxDecoration(
+                  color: homePageBgLightPurpleClr,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20.0),
+                  ),
+                ),
+              ), */
