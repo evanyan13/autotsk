@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:autotsk/animation/custom_rect_tween.dart';
+import 'package:autotsk/buttons/github_sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/util/text_input_field.dart';
 import 'package:autotsk/auth/auth_methods.dart';
 import 'package:autotsk/util/snackbar.dart';
 import 'package:autotsk/screen_type/home/home_page.dart';
+
+import '../buttons/google_sign_in_button.dart';
 // dimensions, width: 365, height: 623
 
 class SignUp extends StatefulWidget {
@@ -252,14 +255,6 @@ class _SignUpState extends State<SignUp> {
                         ),
 
                         SizedBox(height: 20),
-
-                        Opacity(
-                          opacity: 0,
-                          child: Container(
-                            child: Text('Sign Up with Google or Apple'),
-                          ),
-                        ),
-
                         Row(
                           children: <Widget>[
                             SizedBox(width: 58),
@@ -293,34 +288,49 @@ class _SignUpState extends State<SignUp> {
                         SizedBox(height: 10),
 
                         Text(
-                          'Sign Up with Google or Apple',
+                          'Sign up with Google or Github',
                           style: TextStyle(
                             fontSize: 15,
                             fontFamily: "Neometric",
                           ),
                         ),
 
-                        SizedBox(height: 17),
+                        SizedBox(height: 16),
 
                         Row(
+                          // if you want the room, just take anybox and dont was them.
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Image(
-                              image: AssetImage('assets/Googleicon.png'),
-                            ),
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image(
-                                  image: AssetImage('assets/Appleicon.png'),
+                                GoogleSignInButton(),
+                                SizedBox(height: 4.0,),
+                                Text(
+                                  "Google",
+                                  style: TextStyle(
+                                    fontFamily: "Neometric",
+                                    fontSize: 13,
+                                  ),
                                 ),
-                                SizedBox(height: 3),
                               ],
                             ),
-                            SizedBox(
-                              width: 10,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                GitHubSignInButton(),
+                                SizedBox(height: 4.0),
+                                Text(
+                                  "Github",
+                                  style: TextStyle(
+                                    fontFamily: "Neometric",
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
