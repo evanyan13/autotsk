@@ -28,7 +28,7 @@ class GetDataDb {
 
   // create a function that creates a container, placing all the neccessary details that needs to be displayed on the card, inside this function
   Future getAllTaskDetails() async {
-    await FirebaseFirestore.instance
+    return await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('tasks')

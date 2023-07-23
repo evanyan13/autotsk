@@ -26,15 +26,12 @@ class _ViewAllTaskState extends State<ViewAllTask> {
     super.initState();
   }
 
-  Future<List> awaitMethod() async {
+  Future awaitMethod() async {
     task_length = await taskCount();
     taskList = await getAllTaskremoveDup();
-    for (int i = 0; i < task_length; i++) {
-      Widget ui = await buildDisplay(taskList[i]);
-      display.add(ui);
+    for (int i = 0; i < taskList.length; i++) {
+      display.add(await buildDisplay(taskList[i]));
     }
-
-    return taskList;
   }
 
   Future<int> taskCount() async {
@@ -67,8 +64,7 @@ class _ViewAllTaskState extends State<ViewAllTask> {
   Future getAllTaskremoveDup() async {
     await getAllTaskDetails();
     Set<String> seen = Set<String>();
-    taskList = taskList.where((task) => seen.add(task)).toList();
-    return taskList;
+    return taskList.where((task) => seen.add(task)).toList();
   }
 
   Future<DocumentReference> getinfo(String taskid) async {
@@ -84,6 +80,7 @@ class _ViewAllTaskState extends State<ViewAllTask> {
   Future<Widget> buildDisplay(String taskid) async {
     DocumentReference tasking = await getinfo(taskid);
     DocumentSnapshot task = await tasking.get();
+
     TaskModel taskModel = TaskModel(
       uid: task['Task ID'],
       title: task['Title'],
@@ -94,10 +91,11 @@ class _ViewAllTaskState extends State<ViewAllTask> {
       location: task['Location'],
       notes: task['Notes'],
     );
+
     return Container(
       constraints: BoxConstraints(maxWidth: 300),
       decoration: BoxDecoration(
-        color: Colors.purple,
+        color: buttondarkBlueClr,
         borderRadius: BorderRadius.all(
           Radius.circular(30.0),
         ),
