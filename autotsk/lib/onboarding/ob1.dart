@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/routing/hero_dialog_route.dart';
@@ -27,12 +29,6 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
         width: 1000,
         height: 1000,
         decoration: BoxDecoration(
-          /* borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
-                      bottomLeft: Radius.circular(50),
-                      bottomRight: Radius.circular(50),
-                    ), */
           gradient: LinearGradient(
               begin: Alignment(-1.0762932300567627, -2.155672550201416),
               end: Alignment(2.155672788619995, -5.058534145355225),
@@ -86,7 +82,7 @@ class _OnboardingFirstState extends State<OnboardingFirst> {
                     borderRadius: BorderRadius.all(
                       Radius.circular(20.0),
                     ),
-                    color: mainLightBgColour,
+                    color: Colors.white,
                   ),
                   padding: EdgeInsets.fromLTRB(25.0, 20.0, 15.0, 10.0),
                 ),

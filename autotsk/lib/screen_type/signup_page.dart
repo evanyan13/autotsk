@@ -206,7 +206,7 @@ class _SignUpState extends State<SignUp> {
                                 hintText: 'Enter your Password',
                                 textInputType: TextInputType.text,
                                 isPassW: true,
-                                icon: Icon(Icons.perm_device_info),
+                                icon: Icon(Icons.lock),
                               ),
                             ),
                             Container(

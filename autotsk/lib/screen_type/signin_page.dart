@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:autotsk/add_task/addtask_page.dart';
+import 'package:autotsk/buttons/google_sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:autotsk/util/color.dart';
 import 'package:autotsk/util/text_input_field.dart';
@@ -165,7 +165,7 @@ class _SigninState extends State<Signin> {
                                 hintText: 'Enter your Password',
                                 textInputType: TextInputType.text,
                                 isPassW: true,
-                                icon: Icon(Icons.perm_device_info),
+                                icon: Icon(Icons.lock),
                               ),
                             ),
                             Container(
@@ -245,7 +245,7 @@ class _SigninState extends State<Signin> {
                         SizedBox(height: 10),
 
                         Text(
-                          'Sign Up now to maximise your productivity',
+                          'Sign up now to maximise your productivity',
                           style: TextStyle(
                             fontSize: 15,
                             fontFamily: "Neometric",
@@ -293,10 +293,8 @@ class _SigninState extends State<Signin> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image(
-                                  image: AssetImage('assets/Googleicon.png'),
-                                ),
-                                SizedBox(height: 3),
+                                GoogleSignInButton(),
+                                SizedBox(height: 4.0,),
                                 Text(
                                   "Google",
                                   style: TextStyle(
