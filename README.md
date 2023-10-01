@@ -112,8 +112,8 @@ We have come up with a to-do page that gives users an overview of the tasks they
 ### Reminder Page
 On this page, users are able to view all their upcoming tasks, regardless of priority. Our algorithm lists out all the tasks that are upcoming in the near future and filters those that have passed out. Besides, we also displayed the tasks on the UI in a ListView format, allowing users to scroll through all the upcoming tasks they have. We also condense the information about the tasks neatly and display them on the UI in an easy-to-read and easy-to-understand format. If users decide they have to view all the information they have inputted into the tasks at the time of creation, they can click on the “click to see the full details” text and a popup with all the information displayed nicely (see photo on right).
 
-
-
+### UI Design
+[Figma Prototype](https://www.figma.com/file/AfzlIRCCrr6Ah33cxuOsy7/autotsk?type=design&node-id=0%3A1&mode=design&t=6wCSDrTqipNrYfb6-1)
 
 
 
